@@ -1,0 +1,487 @@
+/* ============================================================
+   BGSS & Associates – Floating Pill Navigation Bar
+   Exact match to uploaded reference screenshot in website brand color code (#E61E50)
+   Includes all 7 sections:
+   1. HOME           (fa-table-cells-large)
+   2. PARTNERS       (fa-box-archive)
+   3. SERVICES       (fa-cash-register)
+   4. KNOWLEDGE BANK (fa-book-open)
+   5. FEMA           (fa-globe)
+   6. CAREER         (fa-briefcase)
+   7. CONTACT        (fa-receipt)
+
+   Active state: Pure white elongated capsule with crimson red icon.
+   Inactive state: Pitch black (#000000) icons.
+   Responsive: Present and perfectly proportioned on ALL screen sizes.
+   ============================================================ */
+
+:root {
+  --nav-h: 84px;
+  --nav-h-scrolled: 74px;
+  --color-bgss-red: #E61E50;
+  --color-bgss-red-dark: #C8102E;
+  --color-bgss-red-light: #FF3366;
+}
+
+/* ── Fixed Header Bar ── */
+#site-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-nav, 100);
+  height: var(--nav-h);
+  background: #FFFFFF;
+  border-bottom: 1px solid #ECECEC;
+  display: flex;
+  align-items: center;
+  transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+#site-nav.nav-scrolled {
+  height: var(--nav-h-scrolled);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.nav-container {
+  width: 100%;
+  max-width: var(--max-w-site, 1400px);
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 3vw, 3.5rem);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  height: 100%;
+}
+
+/* ── Brand Logo ── */
+.nav-logo {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  line-height: 1;
+  min-width: 110px;
+}
+
+.nav-logo-text {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.85rem, 2.6vw, 2.5rem);
+  font-weight: 800;
+  color: var(--color-bgss-red);
+  letter-spacing: -0.02em;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.nav-logo:hover .nav-logo-text {
+  opacity: 0.9;
+  transform: scale(1.02);
+}
+
+/* ── PILL NAVIGATION WRAPPER (Center Aligned Hero Element) ── */
+.nav-pill-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+/* ── THE CAPSULE PILL BAR (Exact Match to Screenshot) ── */
+.nav-pill-bar {
+  display: inline-flex;
+  align-items: center;
+  background: var(--color-bgss-red);
+  border-radius: 9999px;
+  padding: 6px 8px;
+  box-shadow: 0 5px 22px rgba(230, 30, 80, 0.32), 0 1px 4px rgba(0, 0, 0, 0.08);
+  gap: 8px;
+  position: relative;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-pill-bar:hover {
+  box-shadow: 0 8px 28px rgba(230, 30, 80, 0.42), 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+/* ── Pill Item / Link ── */
+.nav-pill-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  min-width: 44px;
+  padding: 0 12px;
+  border-radius: 9999px;
+  color: #000000; /* Crisp pitch-black icon matching reference screenshot */
+  font-size: 1.2rem;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+  background: transparent;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-pill-link i {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+  line-height: 1;
+}
+
+/* ── Active State: Pure White Capsule with Red Icon (Exact Match to Screenshot) ── */
+.nav-pill-link.active {
+  background: #FFFFFF !important;
+  color: var(--color-bgss-red) !important;
+  min-width: 58px; /* Elongated white capsule matching screenshot */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.14);
+}
+
+.nav-pill-link.active i {
+  transform: scale(1.06);
+}
+
+/* ── Inactive Item Hover State ── */
+.nav-pill-link:hover:not(.active) {
+  color: #FFFFFF; /* High-contrast white hover glow */
+  transform: scale(1.15);
+}
+
+.nav-pill-link:active {
+  transform: scale(0.94);
+}
+
+/* ── Tooltips ── */
+.nav-pill-link::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: #0F172A;
+  color: #FFFFFF;
+  padding: 5px 11px;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-radius: 6px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 105;
+}
+
+.nav-pill-link:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ── Right Actions (Matching Reference Site Search Circle) ── */
+.nav-right-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-width: 110px;
+  flex-shrink: 0;
+}
+
+.nav-search-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #F1F3F5;
+  color: #495057;
+  border: 1px solid #E2E8F0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0;
+}
+
+.nav-search-circle:hover {
+  background: var(--color-bgss-red);
+  color: #FFFFFF;
+  border-color: var(--color-bgss-red);
+  transform: scale(1.06);
+  box-shadow: 0 3px 12px rgba(230, 30, 80, 0.25);
+}
+
+/* ── Search Flyout Modal ── */
+#nav-search-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(6px);
+  z-index: 150;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 15vh;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+#nav-search-modal.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.search-modal-inner {
+  background: #FFFFFF;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 600px;
+  padding: 1.5rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+  transform: translateY(-20px);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#nav-search-modal.is-open .search-modal-inner {
+  transform: translateY(0);
+}
+
+.search-modal-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0.75rem 1rem;
+  border: 2px solid #E2E8F0;
+  border-radius: 12px;
+  transition: border-color 0.2s ease;
+}
+
+.search-modal-input-wrap:focus-within {
+  border-color: var(--color-bgss-red);
+}
+
+.search-modal-input-wrap i {
+  color: #94A3B8;
+  font-size: 1.1rem;
+}
+
+.search-modal-input {
+  border: none;
+  outline: none;
+  font-size: 1.05rem;
+  font-family: inherit;
+  width: 100%;
+  color: #1E293B;
+}
+
+.search-modal-close {
+  background: transparent;
+  border: none;
+  color: #94A3B8;
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  transition: color 0.2s ease;
+}
+
+.search-modal-close:hover {
+  color: #0F172A;
+}
+
+.search-modal-quicklinks {
+  margin-top: 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.search-quicklink {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 9999px;
+  color: #475569;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.search-quicklink:hover {
+  background: var(--color-bgss-red);
+  color: #FFFFFF;
+  border-color: var(--color-bgss-red);
+}
+
+/* ============================================================
+   RESPONSIVE DESIGN (All Screen Sizes)
+   The user explicitly requested:
+   "Also in all responsive i want this type of navigation bar."
+   The pill bar adapts smoothly down to mobile screens with zero clipping.
+   ============================================================ */
+
+/* ── Tablet & Small Laptops (769px - 1080px) ── */
+@media (max-width: 1080px) {
+  :root {
+    --nav-h: 76px;
+    --nav-h-scrolled: 68px;
+  }
+
+  .nav-container {
+    padding-inline: 1rem;
+    gap: 0.75rem;
+  }
+
+  .nav-logo {
+    min-width: 80px;
+  }
+
+  .nav-right-actions {
+    min-width: 80px;
+  }
+
+  .nav-pill-bar {
+    padding: 5px 7px;
+    gap: 6px;
+  }
+
+  .nav-pill-link {
+    height: 40px;
+    min-width: 38px;
+    padding: 0 10px;
+    font-size: 1.1rem;
+  }
+
+  .nav-pill-link.active {
+    min-width: 52px;
+  }
+}
+
+/* ── Mobile Devices (481px - 768px) ── */
+@media (max-width: 768px) {
+  :root {
+    --nav-h: 72px;
+    --nav-h-scrolled: 66px;
+  }
+
+  .nav-container {
+    padding-inline: 0.75rem;
+    gap: 0.5rem;
+  }
+
+  .nav-logo-text {
+    font-size: 1.6rem;
+  }
+
+  .nav-logo {
+    min-width: auto;
+  }
+
+  .nav-right-actions {
+    min-width: auto;
+  }
+
+  .nav-search-circle {
+    width: 36px;
+    height: 36px;
+    font-size: 0.85rem;
+  }
+
+  .nav-pill-bar {
+    padding: 4px 6px;
+    gap: 4px;
+    box-shadow: 0 4px 16px rgba(230, 30, 80, 0.28);
+  }
+
+  .nav-pill-link {
+    height: 36px;
+    min-width: 34px;
+    padding: 0 8px;
+    font-size: 1rem;
+  }
+
+  .nav-pill-link.active {
+    min-width: 46px;
+  }
+
+  .nav-pill-link::after {
+    display: none; /* Tooltips hidden on touch screens */
+  }
+}
+
+/* ── Compact Smartphone Viewports (361px - 480px) ── */
+@media (max-width: 480px) {
+  :root {
+    --nav-h: 68px;
+    --nav-h-scrolled: 62px;
+  }
+
+  .nav-container {
+    padding-inline: 0.5rem;
+    gap: 0.35rem;
+  }
+
+  .nav-logo-text {
+    font-size: 1.35rem;
+  }
+
+  .nav-search-circle {
+    display: none; /* Maximize space for the pill bar */
+  }
+
+  .nav-pill-wrapper {
+    justify-content: flex-end;
+  }
+
+  .nav-pill-bar {
+    padding: 4px 5px;
+    gap: 3px;
+  }
+
+  .nav-pill-link {
+    height: 34px;
+    min-width: 29px;
+    padding: 0 6px;
+    font-size: 0.9rem;
+  }
+
+  .nav-pill-link.active {
+    min-width: 40px;
+  }
+}
+
+/* ── Ultra-Compact Smartphones (<= 360px) ── */
+@media (max-width: 360px) {
+  .nav-container {
+    padding-inline: 0.35rem;
+    gap: 0.25rem;
+  }
+
+  .nav-logo-text {
+    font-size: 1.2rem;
+  }
+
+  .nav-pill-bar {
+    padding: 3px 4px;
+    gap: 2px;
+  }
+
+  .nav-pill-link {
+    height: 32px;
+    min-width: 26px;
+    padding: 0 4px;
+    font-size: 0.82rem;
+  }
+
+  .nav-pill-link.active {
+    min-width: 34px;
+  }
+}

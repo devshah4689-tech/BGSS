@@ -1,0 +1,6 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="600" height="750" viewBox="0 0 600 750">
+  <rect width="600" height="750" fill="#F4F1EC"/>
+  <text x="50%" y="46%" dominant-baseline="middle" text-anchor="middle" font-family="Georgia,serif" font-size="26" fill="#0D1B2A" opacity="0.7">About – Office</text>
+  <text x="50%" y="56%" dominant-baseline="middle" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" fill="#0D1B2A" opacity="0.35">600 x 750 px – Replace with actual image</text>
+  <rect x="20" y="20" width="560" height="710" fill="none" stroke="#0D1B2A" stroke-width="1" opacity="0.12"/>
+</svg>

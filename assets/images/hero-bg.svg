@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#090E17"/>
+      <stop offset="50%" stop-color="#0F172A"/>
+      <stop offset="100%" stop-color="#0B1320"/>
+    </linearGradient>
+    <radialGradient id="redGlow" cx="80%" cy="25%" r="60%">
+      <stop offset="0%" stop-color="#C8102E" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#C8102E" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="archGrid" width="120" height="120" patternUnits="userSpaceOnUse">
+      <path d="M 120 0 L 0 0 0 120" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+      <circle cx="120" cy="0" r="1.5" fill="rgba(200,16,46,0.3)"/>
+    </pattern>
+    <linearGradient id="beam" x1="0%" y1="0%" x2="100%" y2="80%">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.05)"/>
+      <stop offset="100%" stop-color="transparent"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Base Background -->
+  <rect width="1920" height="1080" fill="url(#bgGrad)"/>
+  
+  <!-- Subtle Red Ambience -->
+  <rect width="1920" height="1080" fill="url(#redGlow)"/>
+  
+  <!-- Architectural Diagonal Beams -->
+  <polygon points="600,0 950,0 450,1080 100,1080" fill="url(#beam)"/>
+  <polygon points="1200,0 1550,0 1050,1080 700,1080" fill="url(#beam)"/>
+  
+  <!-- Precision Technical Grid -->
+  <rect width="1920" height="1080" fill="url(#archGrid)"/>
+  
+  <!-- Subtle Architectural Diagonal Lines -->
+  <line x1="0" y1="200" x2="1920" y2="900" stroke="rgba(200,16,46,0.08)" stroke-width="1.5"/>
+  <line x1="200" y1="0" x2="1920" y2="750" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+</svg>

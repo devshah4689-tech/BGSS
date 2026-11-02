@@ -1,0 +1,486 @@
+﻿/* ============================================================
+   BGSS & Associates – Page-Specific Styles
+   pages.css  |  v1.0
+   (Page hero, about page, services page, contact page extras)
+   ============================================================ */
+
+/* ── Page Hero (Shared: about, services, contact) ── */
+.page-hero {
+  position: relative;
+  min-height: clamp(22rem, 50vh, 38rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-block: calc(var(--nav-h) + 3rem) 4rem;
+  background: var(--color-navy);
+  overflow: hidden;
+}
+
+.page-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(13,27,42,0.95) 0%,
+    rgba(13,27,42,0.75) 100%
+  );
+  z-index: 1;
+}
+
+.page-hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.page-hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.3;
+}
+
+/* Decorative geometric accent */
+.page-hero::after {
+  content: '';
+  position: absolute;
+  right: 5%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: clamp(200px, 30vw, 400px);
+  height: clamp(200px, 30vw, 400px);
+  border-radius: 50%;
+  border: 1px solid rgba(200, 16, 46, 0.25);
+  z-index: 1;
+}
+
+.page-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: var(--max-w-site);
+  margin-inline: auto;
+  padding-inline: clamp(1.5rem, 5vw, 5rem);
+  width: 100%;
+}
+
+.page-hero-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-xs);
+  letter-spacing: var(--ls-wide);
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+  margin-bottom: var(--space-6);
+}
+.page-hero-breadcrumb a {
+  color: rgba(255,255,255,0.4);
+  transition: color var(--dur-fast);
+}
+.page-hero-breadcrumb a:hover { color: var(--color-gold-light); }
+.page-hero-breadcrumb span   { color: rgba(255,255,255,0.6); }
+
+.page-hero h1 {
+  font-size: clamp(2.25rem, 5vw, 4rem);
+  color: var(--color-white);
+  font-weight: var(--fw-bold);
+  line-height: 1.08;
+  letter-spacing: var(--ls-tight);
+  max-width: 20ch;
+  margin-top: var(--space-4);
+}
+.page-hero h1 em {
+  font-style: italic;
+  color: var(--color-gold-light);
+}
+.page-hero .page-hero-sub {
+  font-size: var(--text-md);
+  color: rgba(255,255,255,0.65);
+  max-width: 55ch;
+  line-height: 1.7;
+  margin-top: var(--space-6);
+  font-weight: var(--fw-light);
+}
+
+/* ── About Page Extras ── */
+.since-section {
+  background: var(--color-cream);
+}
+
+.since-year {
+  font-family: var(--font-display);
+  font-size: clamp(5rem, 12vw, 10rem);
+  font-weight: var(--fw-bold);
+  color: var(--color-border);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  pointer-events: none;
+  user-select: none;
+}
+
+.since-quote {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-style: italic;
+  color: var(--color-navy);
+  line-height: 1.3;
+  position: relative;
+  padding-left: var(--space-8);
+}
+.since-quote::before {
+  content: '\201C';
+  position: absolute;
+  left: 0;
+  top: -0.25em;
+  font-size: 4em;
+  color: var(--color-gold);
+  line-height: 1;
+  opacity: 0.4;
+}
+
+/* Partner Biography Card */
+.partner-bio-card {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: clamp(2rem, 4vw, 4rem);
+  align-items: start;
+  padding-block: clamp(2.5rem, 4vw, 4rem);
+  border-bottom: 1px solid var(--color-border);
+}
+.partner-bio-card:last-child { border-bottom: none; }
+
+.partner-bio-card .partner-img-wrap {
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  background: #090E17;
+  flex-shrink: 0;
+  position: relative;
+  border-radius: 8px;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.partner-bio-card:hover .partner-img-wrap {
+  box-shadow: 0 12px 30px rgba(0,0,0,0.18), 0 0 0 2px rgba(255,255,255,0.9);
+  transform: translateY(-3px);
+}
+.partner-bio-card .partner-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  filter: grayscale(100%) contrast(1.28) brightness(0.70);
+  transform: scale(1.01);
+  transition: filter 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.partner-bio-card:hover .partner-img-wrap img {
+  filter: grayscale(0%) contrast(1.02) brightness(1.04);
+  transform: scale(1.05);
+}
+.partner-bio-card .partner-img-wrap::after {
+  content: '';
+  position: absolute;
+  top: -60%;
+  left: -130%;
+  width: 70%;
+  height: 220%;
+  background: linear-gradient(
+    115deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.3) 35%,
+    rgba(255, 255, 255, 0.95) 50%,
+    rgba(255, 255, 255, 0.3) 65%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(25deg);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 5;
+}
+.partner-bio-card:hover .partner-img-wrap::after {
+  animation: partner-white-sweep 0.85s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.partner-bio-content .partner-name {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  color: var(--color-navy);
+}
+.partner-bio-content .partner-designation {
+  font-size: var(--text-xs);
+  letter-spacing: var(--ls-widest);
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-top: var(--space-1);
+}
+.partner-bio-content .partner-specialty-tag {
+  display: inline-block;
+  margin-top: var(--space-3);
+  padding: var(--space-1) var(--space-4);
+  border: 1px solid var(--color-border);
+  font-size: var(--text-xs);
+  color: var(--color-muted);
+  letter-spacing: var(--ls-wide);
+}
+.partner-bio-content .partner-bio {
+  margin-top: var(--space-6);
+  color: var(--color-slate);
+  line-height: 1.75;
+  font-size: var(--text-base);
+}
+
+/* Values section */
+.values-section {
+  background: var(--color-navy);
+}
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(2rem, 4vw, 4rem);
+}
+.value-col {
+  padding: clamp(2rem, 3vw, 3rem);
+  border: 1px solid rgba(255,255,255,0.07);
+  transition: border-color var(--dur-base), background var(--dur-base);
+}
+.value-col:hover {
+  border-color: rgba(200, 16, 46, 0.4);
+  background: rgba(200, 16, 46, 0.03);
+}
+.value-col-title {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  color: var(--color-white);
+  font-weight: var(--fw-semibold);
+  margin-bottom: var(--space-5);
+}
+.value-col p {
+  color: rgba(255,255,255,0.55);
+  font-size: var(--text-sm);
+  line-height: 1.75;
+}
+.value-col ul {
+  list-style: none;
+  margin-top: var(--space-4);
+}
+.value-col ul li {
+  color: rgba(255,255,255,0.65);
+  font-size: var(--text-sm);
+  padding-block: var(--space-2);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+.value-col ul li::before {
+  content: '';
+  display: block;
+  width: 1rem;
+  height: 1px;
+  background: var(--color-gold);
+  flex-shrink: 0;
+}
+
+/* ── Services Page Extras ── */
+.service-detail {
+  padding-block: clamp(4rem, 7vw, 7rem);
+  border-bottom: 1px solid var(--color-border);
+}
+.service-detail:nth-child(even) { background: var(--color-off-white); }
+
+.service-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(3rem, 6vw, 6rem);
+  align-items: center;
+}
+.service-detail:nth-child(even) .service-detail-content { order: 1; }
+.service-detail:nth-child(even) .service-detail-visual  { order: 2; }
+
+.service-detail-num {
+  font-family: var(--font-display);
+  font-size: 5rem;
+  font-weight: var(--fw-bold);
+  color: var(--color-border);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  margin-bottom: var(--space-2);
+}
+.service-detail h2 {
+  font-size: clamp(1.75rem, 3vw, 2.75rem);
+  color: var(--color-navy);
+  margin-bottom: var(--space-6);
+}
+.service-detail p {
+  color: var(--color-slate);
+  line-height: 1.75;
+  margin-bottom: var(--space-4);
+}
+.service-detail p:last-of-type { margin-bottom: 0; }
+
+.service-capabilities {
+  margin-top: var(--space-8);
+  list-style: none;
+}
+.service-capabilities li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding-block: var(--space-3);
+  border-bottom: 1px solid var(--color-border);
+  font-size: var(--text-sm);
+  color: var(--color-charcoal);
+  font-weight: var(--fw-medium);
+}
+.service-capabilities li::before {
+  content: '';
+  display: block;
+  width: 1.5rem;
+  height: 1px;
+  background: var(--color-gold);
+  flex-shrink: 0;
+}
+
+.service-detail-img-placeholder {
+  background: var(--color-cream);
+  aspect-ratio: 4/3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-border);
+  border: 1px solid var(--color-border-light);
+  position: relative;
+  overflow: hidden;
+}
+.service-detail-img-placeholder::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-gold), var(--color-gold-light));
+}
+
+/* ── Contact Page Extras ── */
+.contact-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(3rem, 6vw, 6rem);
+  align-items: start;
+}
+.contact-info-col h2 {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  color: var(--color-navy);
+  margin-bottom: var(--space-8);
+}
+.contact-info-item {
+  display: flex;
+  gap: var(--space-5);
+  align-items: flex-start;
+  padding-block: var(--space-6);
+  border-bottom: 1px solid var(--color-border);
+}
+.contact-info-item:last-child { border-bottom: none; }
+.contact-info-item-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  background: var(--color-gold-pale);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--color-gold);
+}
+.contact-info-item-label {
+  font-size: var(--text-xs);
+  letter-spacing: var(--ls-widest);
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin-bottom: var(--space-2);
+}
+.contact-info-item-value {
+  font-size: var(--text-md);
+  color: var(--color-navy);
+  font-weight: var(--fw-medium);
+}
+.contact-info-item-value a {
+  color: var(--color-navy);
+  transition: color var(--dur-fast);
+}
+.contact-info-item-value a:hover { color: var(--color-gold); }
+
+.map-section { background: var(--color-off-white); }
+.map-placeholder {
+  width: 100%;
+  height: clamp(250px, 40vh, 450px);
+  background: var(--color-cream);
+  border: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  color: var(--color-muted);
+}
+.map-placeholder svg { color: var(--color-gold); opacity: 0.6; }
+
+/* ── CTA Strip (shared) ── */
+.cta-strip {
+  background: var(--color-off-white);
+  border-top: 1px solid var(--color-border);
+  padding-block: clamp(3rem, 5vw, 5rem);
+  text-align: center;
+}
+.cta-strip h2 {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  color: var(--color-navy);
+  margin-bottom: var(--space-8);
+}
+.cta-strip .btn-row {
+  display: flex;
+  gap: var(--space-4);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ── Form Success State ── */
+.form-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-16) var(--space-8);
+  gap: var(--space-5);
+}
+.form-success svg { color: var(--color-gold); }
+.form-success h3 {
+  font-size: var(--text-xl);
+  color: var(--color-navy);
+}
+.form-success p {
+  color: var(--color-slate);
+  max-width: 40ch;
+}
+
+/* ── Field invalid state ── */
+.is-invalid {
+  border-color: #c0392b !important;
+  background: #fff8f8 !important;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .partner-bio-card     { grid-template-columns: 200px 1fr; }
+  .service-detail-grid  { grid-template-columns: 1fr; }
+  .service-detail:nth-child(even) .service-detail-content { order: unset; }
+  .service-detail:nth-child(even) .service-detail-visual  { order: unset; }
+  .contact-info-grid    { grid-template-columns: 1fr; }
+  .values-grid          { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .partner-bio-card { grid-template-columns: 1fr; }
+  .page-hero h1     { font-size: clamp(1.75rem, 8vw, 2.5rem); }
+}
+

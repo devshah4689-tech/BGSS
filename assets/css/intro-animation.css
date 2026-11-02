@@ -1,0 +1,202 @@
+/* ============================================================
+   BGSS & Associates – Cinematic Logo Animation Intro
+   intro-animation.css | High-end CXO Brand Motion Experience
+   ============================================================ */
+
+#logo-intro-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: #04070D;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  user-select: none;
+  pointer-events: auto;
+}
+
+#logo-intro-overlay.is-finished {
+  pointer-events: none;
+  display: none !important;
+}
+
+/* ── Particle & Ambient Background ── */
+.intro-canvas-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.intro-ambient-glow {
+  position: absolute;
+  width: min(650px, 90vw);
+  height: min(650px, 90vw);
+  border-radius: 50%;
+  background: radial-gradient(circle at center, rgba(230, 30, 80, 0.22) 0%, rgba(200, 16, 46, 0.08) 45%, transparent 70%);
+  filter: blur(50px);
+  z-index: 1;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  animation: introGlowPulse 4s ease-in-out infinite alternate;
+}
+
+@keyframes introGlowPulse {
+  0% { transform: translate(-50%, -50%) scale(0.85); opacity: 0.6; }
+  100% { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
+}
+
+/* ── Logo Container ── */
+.intro-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1.5rem;
+  max-width: 900px;
+}
+
+/* ── SVG Logo Wordmark ── */
+.intro-svg-wrap {
+  position: relative;
+  width: min(440px, 80vw);
+  height: auto;
+  overflow: hidden;
+}
+
+.intro-logo-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Laser stroke drawing */
+.intro-logo-stroke {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 88px;
+  font-weight: 800;
+  fill: none;
+  stroke: #FF3366;
+  stroke-width: 2px;
+  stroke-dasharray: 600;
+  stroke-dashoffset: 600;
+  letter-spacing: 0.02em;
+  filter: drop-shadow(0 0 12px rgba(255, 51, 102, 0.85));
+}
+
+/* Solid Fill */
+.intro-logo-fill {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 88px;
+  font-weight: 800;
+  fill: url(#introRedGrad);
+  opacity: 0;
+  letter-spacing: 0.02em;
+  filter: drop-shadow(0 4px 20px rgba(230, 30, 80, 0.45));
+}
+
+/* Metallic Shimmer Sweep */
+.intro-shimmer {
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.75) 50%,
+    transparent 70%
+  );
+  transform: skewX(-25deg);
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+/* ── Subtitle & Taglines ── */
+.intro-subtitle {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: clamp(0.75rem, 1.6vw, 1rem);
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  margin-top: 1.25rem;
+  opacity: 0;
+  transform: translateY(15px);
+}
+
+.intro-divider {
+  position: relative;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #E61E50, #FF3366, transparent);
+  margin: 1.2rem auto;
+  box-shadow: 0 0 10px rgba(230, 30, 80, 0.8);
+}
+
+.intro-tagline {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: clamp(0.6875rem, 1.2vw, 0.8125rem);
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+/* ── Skip Button ── */
+.intro-skip-btn {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: rgba(255, 255, 255, 0.7);
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: 9999px;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all 0.25s ease;
+  opacity: 0;
+}
+
+.intro-skip-btn:hover {
+  background: rgba(230, 30, 80, 0.2);
+  border-color: #E61E50;
+  color: #FFFFFF;
+  box-shadow: 0 0 15px rgba(230, 30, 80, 0.4);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 600px) {
+  .intro-logo-stroke,
+  .intro-logo-fill {
+    font-size: 72px;
+  }
+  .intro-skip-btn {
+    bottom: 1.25rem;
+    right: 1.25rem;
+    padding: 6px 14px;
+    font-size: 0.6875rem;
+  }
+}
