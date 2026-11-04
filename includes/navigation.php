@@ -28,9 +28,9 @@ function nav_active(string $slug, string $current): string
 <nav id="site-nav" role="navigation" aria-label="Main navigation">
     <div class="nav-container">
 
-        <!-- Logo: Bold Red BGSS -->
+        <!-- Logo: Official Brand Vector Logo -->
         <a href="/" class="nav-logo" aria-label="<?= htmlspecialchars(SITE_NAME, ENT_QUOTES, 'UTF-8') ?> - Home">
-            <span class="nav-logo-text">BGSS</span>
+            <img src="/assets/images/bgss-logo.svg" alt="<?= htmlspecialchars(SITE_NAME, ENT_QUOTES, 'UTF-8') ?>" class="nav-logo-img">
         </a>
 
         <!-- PILL NAVIGATION BAR (Exact Match to Screenshot in Brand Red - All 7 Sections) -->
@@ -67,7 +67,7 @@ function nav_active(string $slug, string $current): string
                 </a>
 
                 <!-- 4. KNOWLEDGE BANK -->
-                <a href="/services.php#knowledge-bank"
+                <a href="/knowledge-bank.php"
                    class="nav-pill-link <?= nav_active('knowledge-bank', $current_page) ?>"
                    data-tooltip="Knowledge Bank"
                    aria-label="Knowledge Bank"

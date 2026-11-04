@@ -29,6 +29,7 @@ $footer_year = date('Y');
             <!-- ── Column 1 : Brand ──────────────────────────────────────── -->
             <div class="footer-col footer-col--brand">
                 <a href="/" class="footer-logo" aria-label="<?= htmlspecialchars(SITE_NAME, ENT_QUOTES, 'UTF-8') ?> - Home">
+                    <img src="/assets/images/bgss-logo-white.svg" alt="<?= htmlspecialchars(SITE_NAME, ENT_QUOTES, 'UTF-8') ?>" style="height: 30px; width: auto; margin-bottom: 8px; display: block;">
                     <span class="footer-logo-name"><?= htmlspecialchars(SITE_NAME, ENT_QUOTES, 'UTF-8') ?></span>
                     <span class="footer-logo-sub">Chartered Accountants</span>
                 </a>
@@ -83,11 +84,11 @@ $footer_year = date('Y');
                 <h3 class="footer-heading">Contact Us</h3>
 
                 <address class="footer-contact-list">
-                    <div class="footer-contact-item">
-                        <i class="fa-solid fa-phone footer-contact-icon" aria-hidden="true"></i>
-                        <a href="tel:+917948904100"
-                           aria-label="Call us at <?= htmlspecialchars(SITE_PHONE, ENT_QUOTES, 'UTF-8') ?>"
-                        ><?= htmlspecialchars(SITE_PHONE, ENT_QUOTES, 'UTF-8') ?></a>
+                    <div class="footer-contact-item" style="white-space:nowrap;display:flex;align-items:center;gap:6px;flex-wrap:nowrap;">
+                        <i class="fa-solid fa-phone footer-contact-icon" aria-hidden="true" style="flex-shrink:0;"></i>
+                        <a href="tel:+919099927783" style="white-space:nowrap;" aria-label="Call us at <?= htmlspecialchars(SITE_PHONE, ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars(SITE_PHONE, ENT_QUOTES, 'UTF-8') ?></a>
+                        <span style="opacity:0.6;">/</span>
+                        <a href="tel:+917948904100" style="white-space:nowrap;" aria-label="Call us at <?= htmlspecialchars(SITE_PHONE_ALT, ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars(SITE_PHONE_ALT, ENT_QUOTES, 'UTF-8') ?></a>
                     </div>
 
                     <div class="footer-contact-item">
@@ -162,6 +163,9 @@ $footer_year = date('Y');
 <script src="/assets/js/intro-animation.js?v=1.0" defer></script>
 <script src="/assets/js/main.js?v=1.0"       defer></script>
 <script src="/assets/js/animations.js?v=1.0" defer></script>
+<?php if (!empty($extra_js)): ?>
+<script src="<?= htmlspecialchars($extra_js, ENT_QUOTES, 'UTF-8') ?>" defer></script>
+<?php endif; ?>
 
 </body>
 </html>
