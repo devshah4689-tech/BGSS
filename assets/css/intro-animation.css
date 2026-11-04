@@ -37,7 +37,7 @@
   width: min(650px, 90vw);
   height: min(650px, 90vw);
   border-radius: 50%;
-  background: radial-gradient(circle at center, rgba(230, 30, 80, 0.22) 0%, rgba(200, 16, 46, 0.08) 45%, transparent 70%);
+  background: radial-gradient(circle at center, rgba(167, 37, 58, 0.22) 0%, rgba(137, 30, 48, 0.08) 45%, transparent 70%);
   filter: blur(50px);
   z-index: 1;
   pointer-events: none;
@@ -67,7 +67,7 @@
 /* ── SVG Logo Wordmark ── */
 .intro-svg-wrap {
   position: relative;
-  width: min(440px, 80vw);
+  width: min(500px, 86vw);
   height: auto;
   overflow: hidden;
 }
@@ -78,29 +78,34 @@
   display: block;
 }
 
-/* Laser stroke drawing */
-.intro-logo-stroke {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 88px;
-  font-weight: 800;
+/* Laser stroke drawing (vector paths) */
+.intro-logo-stroke path {
   fill: none;
-  stroke: #FF3366;
+  stroke: #A7253A;
+  stroke-width: 48px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 6500;
+  stroke-dashoffset: 6500;
+  filter: drop-shadow(0 0 16px rgba(167, 37, 58, 0.95)) drop-shadow(0 0 32px rgba(210, 144, 155, 0.6));
+}
+
+.intro-logo-stroke:not(g) {
+  fill: none;
+  stroke: #A7253A;
   stroke-width: 2px;
   stroke-dasharray: 600;
   stroke-dashoffset: 600;
-  letter-spacing: 0.02em;
-  filter: drop-shadow(0 0 12px rgba(255, 51, 102, 0.85));
 }
 
-/* Solid Fill */
+/* Solid Fill (vector paths) */
 .intro-logo-fill {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 88px;
-  font-weight: 800;
-  fill: url(#introRedGrad);
   opacity: 0;
-  letter-spacing: 0.02em;
-  filter: drop-shadow(0 4px 20px rgba(230, 30, 80, 0.45));
+  filter: drop-shadow(0 4px 28px rgba(167, 37, 58, 0.55));
+}
+
+.intro-logo-fill path {
+  fill: url(#introRedGrad);
 }
 
 /* Metallic Shimmer Sweep */
@@ -125,11 +130,11 @@
 .intro-subtitle {
   font-family: var(--font-body, 'Inter', sans-serif);
   font-size: clamp(0.75rem, 1.6vw, 1rem);
-  font-weight: 700;
-  letter-spacing: 0.15em;
+  font-weight: 600;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #FFFFFF;
-  margin-top: 1.25rem;
+  color: #DFE0E0; /* Brand Guidelines Secondary Silver */
+  margin-top: 1.5rem;
   opacity: 0;
   transform: translateY(15px);
 }
@@ -138,18 +143,18 @@
   position: relative;
   width: 0;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #E61E50, #FF3366, transparent);
-  margin: 1.2rem auto;
-  box-shadow: 0 0 10px rgba(230, 30, 80, 0.8);
+  background: linear-gradient(90deg, transparent, #A7253A 25%, #D2909B 50%, #A7253A 75%, transparent);
+  margin: 1.25rem auto;
+  box-shadow: 0 0 14px rgba(167, 37, 58, 0.85);
 }
 
 .intro-tagline {
   font-family: var(--font-body, 'Inter', sans-serif);
-  font-size: clamp(0.6875rem, 1.2vw, 0.8125rem);
+  font-size: clamp(0.6875rem, 1.2vw, 0.82rem);
   font-weight: 400;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(223, 224, 224, 0.75); /* Soft Silver */
   opacity: 0;
   transform: translateY(10px);
 }
@@ -181,10 +186,10 @@
 }
 
 .intro-skip-btn:hover {
-  background: rgba(230, 30, 80, 0.2);
-  border-color: #E61E50;
+  background: rgba(167, 37, 58, 0.2);
+  border-color: #A7253A;
   color: #FFFFFF;
-  box-shadow: 0 0 15px rgba(230, 30, 80, 0.4);
+  box-shadow: 0 0 15px rgba(167, 37, 58, 0.4);
   transform: translateY(-1px);
 }
 

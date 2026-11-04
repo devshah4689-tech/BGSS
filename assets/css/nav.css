@@ -1,6 +1,6 @@
 /* ============================================================
    BGSS & Associates – Floating Pill Navigation Bar
-   Exact match to uploaded reference screenshot in website brand color code (#E61E50)
+   Exact match to uploaded reference screenshot in brand color code (#A7253A)
    Includes all 7 sections:
    1. HOME           (fa-table-cells-large)
    2. PARTNERS       (fa-box-archive)
@@ -18,9 +18,9 @@
 :root {
   --nav-h: 84px;
   --nav-h-scrolled: 74px;
-  --color-bgss-red: #E61E50;
-  --color-bgss-red-dark: #C8102E;
-  --color-bgss-red-light: #FF3366;
+  --color-bgss-red: #A7253A;
+  --color-bgss-red-dark: #891E30;
+  --color-bgss-red-light: #D2909B;
 }
 
 /* ── Fixed Header Bar ── */
@@ -67,12 +67,24 @@
   min-width: 110px;
 }
 
+.nav-logo-img {
+  height: 34px;
+  width: auto;
+  display: block;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.nav-logo:hover .nav-logo-img {
+  opacity: 0.92;
+  transform: scale(1.02);
+}
+
 .nav-logo-text {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Fraunces', 'Iowan Old Style', Georgia, serif;
   font-size: clamp(1.85rem, 2.6vw, 2.5rem);
-  font-weight: 800;
+  font-weight: 600;
   color: var(--color-bgss-red);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
   transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
@@ -96,7 +108,7 @@
   background: var(--color-bgss-red);
   border-radius: 9999px;
   padding: 6px 8px;
-  box-shadow: 0 5px 22px rgba(230, 30, 80, 0.32), 0 1px 4px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 5px 22px rgba(167, 37, 58, 0.32), 0 1px 4px rgba(0, 0, 0, 0.08);
   gap: 8px;
   position: relative;
   transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
@@ -104,7 +116,7 @@
 }
 
 .nav-pill-bar:hover {
-  box-shadow: 0 8px 28px rgba(230, 30, 80, 0.42), 0 2px 6px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 8px 28px rgba(167, 37, 58, 0.42), 0 2px 6px rgba(0, 0, 0, 0.12);
 }
 
 /* ── Pill Item / Link ── */
@@ -166,7 +178,7 @@
   background: #0F172A;
   color: #FFFFFF;
   padding: 5px 11px;
-  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
   font-size: 0.6875rem;
   font-weight: 700;
   letter-spacing: 0.06em;
@@ -215,7 +227,7 @@
   color: #FFFFFF;
   border-color: var(--color-bgss-red);
   transform: scale(1.06);
-  box-shadow: 0 3px 12px rgba(230, 30, 80, 0.25);
+  box-shadow: 0 3px 12px rgba(167, 37, 58, 0.25);
 }
 
 /* ── Search Flyout Modal ── */
@@ -398,7 +410,7 @@
   .nav-pill-bar {
     padding: 4px 6px;
     gap: 4px;
-    box-shadow: 0 4px 16px rgba(230, 30, 80, 0.28);
+    box-shadow: 0 4px 16px rgba(167, 37, 58, 0.28);
   }
 
   .nav-pill-link {

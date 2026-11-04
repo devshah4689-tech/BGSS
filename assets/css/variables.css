@@ -1,40 +1,66 @@
 /* ============================================================
    BGSS & Associates – Design System & Global Styles
-   variables.css  |  v1.0
+   variables.css  |  v1.0 (Brand Guidelines Aligned)
    ============================================================ */
 
 /* ── 1. CSS Custom Properties (Design Tokens) ── */
 :root {
-  /* Palette — Premium Crimson Red & Clean White */
-  --color-white:        #FFFFFF;
-  --color-off-white:    #FAFAFA;
-  --color-cream:        #F8F9FA;
-  --color-navy:         #0F172A;
-  --color-navy-mid:     #1E293B;
-  --color-charcoal:     #1E293B;
-  --color-slate:        #475569;
-  --color-muted:        #64748B;
-  --color-border:       #E2E8F0;
-  --color-border-light: #F1F5F9;
+  /* Brand Guidelines v1.0 Palette */
+  --crimson-50:         #F8F1F2;
+  --crimson-100:        #F2E2E5;
+  --crimson-200:        #E4C0C6;
+  --crimson-300:        #D2909B;
+  --crimson-500:        #A7253A; /* Core Crimson */
+  --crimson-700:        #891E30; /* Crimson Deep */
+  --crimson-900:        #6B1825; /* Crimson Dark */
   
-  /* Brand Red Palette (Matching original BGSS Corporate Identity: https://bgssassociates.com/) */
-  --color-primary:      #E61E50;
-  --color-primary-dark: #C8102E;
-  --color-primary-light:#FF3366;
-  --color-primary-pale: #FFF0F3;
-  --color-red:          #E61E50;
-  
-  /* System Accents — mapped to Corporate Red */
-  --color-gold:         #E61E50;
-  --color-gold-light:   #FF3366;
-  --color-gold-pale:    #FFF0F3;
-  --color-accent:       #E61E50;
-  --color-accent-dark:  #C8102E;
+  --silver:             #DFE0E0; /* Secondary Silver */
+  --bg:                 #FCFCFC; /* Base Canvas */
+  --ink:                #1E1F21; /* Primary Text */
 
-  /* Typography — Authoritative Corporate Chartered Accountancy Stack */
-  --font-display:  'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --grey-100:           #E6E6E6;
+  --grey-200:           #D0D0D0;
+  --grey-300:           #A8A8A9;
+  --grey-400:           #848586;
+  --grey-500:           #616163;
+  --grey-600:           #424244;
+  --grey-700:           #303133;
+
+  /* Semantic status colors */
+  --color-success:      #2F6D4F;
+  --color-warning:      #9C6B1F;
+  --color-error:        #B3261E;
+
+  /* Standard aliases */
+  --color-white:        #FFFFFF;
+  --color-off-white:    #FCFCFC;
+  --color-cream:        #F8F1F2;
+  --color-navy:         #1E1F21;
+  --color-navy-mid:     #303133;
+  --color-charcoal:     #1E1F21;
+  --color-slate:        #616163;
+  --color-muted:        #848586;
+  --color-border:       #E6E6E6;
+  --color-border-light: #F2E2E5;
+  
+  /* Brand Crimson Palette */
+  --color-primary:      #A7253A;
+  --color-primary-dark: #891E30;
+  --color-primary-light:#D2909B;
+  --color-primary-pale: #F8F1F2;
+  --color-red:          #A7253A;
+  
+  /* System Accents — mapped to Brand Crimson */
+  --color-gold:         #A7253A;
+  --color-gold-light:   #D2909B;
+  --color-gold-pale:    #F8F1F2;
+  --color-accent:       #A7253A;
+  --color-accent-dark:  #891E30;
+
+  /* Typography — Brand Guidelines v1.0 */
+  --font-display:  'Fraunces', 'Iowan Old Style', Georgia, serif;
   --font-body:     'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-serif:    'Lora', 'Georgia', serif;
+  --font-serif:    'Fraunces', 'Georgia', serif;
   --font-mono:     'JetBrains Mono', 'Courier New', monospace;
 
   /* Font Sizes – fluid scale */
@@ -108,12 +134,12 @@
   --dur-slower:    700ms;
 
   /* Shadows */
-  --shadow-xs:  0 1px 3px rgba(13,27,42,0.06);
-  --shadow-sm:  0 2px 8px rgba(13,27,42,0.08);
-  --shadow-md:  0 8px 24px rgba(13,27,42,0.10);
-  --shadow-lg:  0 20px 50px rgba(13,27,42,0.14);
-  --shadow-xl:  0 40px 80px rgba(13,27,42,0.18);
-  --shadow-gold:0 4px 20px rgba(200,16,46,0.25);
+  --shadow-xs:  0 1px 3px rgba(30,31,33,0.06);
+  --shadow-sm:  0 2px 8px rgba(30,31,33,0.08);
+  --shadow-md:  0 8px 24px rgba(30,31,33,0.10);
+  --shadow-lg:  0 20px 50px rgba(30,31,33,0.14);
+  --shadow-xl:  0 40px 80px rgba(30,31,33,0.18);
+  --shadow-gold:0 4px 20px rgba(167,37,58,0.25);
 
   /* Border Radius */
   --radius-sm:   2px;
@@ -168,9 +194,9 @@ input, textarea, select { font: inherit; }
 /* ── 3. Typography ── */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
-  font-weight: var(--fw-bold);
+  font-weight: 600;
   line-height: var(--lh-tight);
-  letter-spacing: var(--ls-tight);
+  letter-spacing: -0.01em;
   color: var(--color-navy);
 }
 
