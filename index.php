@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * BGSS & Associates – Homepage
  * index.php
@@ -17,57 +17,366 @@ require_once __DIR__ . '/includes/navigation.php';
 <main id="main-content">
 
   <!-- ═══════════════════════════════════════════════════════
-       SECTION 01 – HERO
+       SECTION 01 – 4-BANNER HERO SLIDER WITH ANIMATION & LUXURY COVERED BORDER
        ═══════════════════════════════════════════════════════ -->
-  <section class="hero" id="hero" aria-label="Homepage hero">
+  <section class="hero hero-slider-section" id="hero" aria-label="Homepage hero banner slider">
+    <div class="hero-canvas-frame">
+      <!-- Illuminated Top Curved Border Beam -->
+      <div class="hero-curved-border-beam" aria-hidden="true"></div>
 
-    <div class="hero-bg" aria-hidden="true">
-      <img
-        src="/assets/images/hero-bg.jpg"
-        data-src="/assets/images/hero-bg.jpg"
-        alt=""
-        fetchpriority="high"
-        decoding="async"
-      >
-    </div>
-    <div class="hero-overlay" aria-hidden="true"></div>
+      <!-- Luxury Corner Accent Brackets -->
+      <div class="hero-corner-bracket top-left" aria-hidden="true"></div>
+      <div class="hero-corner-bracket top-right" aria-hidden="true"></div>
+      <div class="hero-corner-bracket bottom-left" aria-hidden="true"></div>
+      <div class="hero-corner-bracket bottom-right" aria-hidden="true"></div>
 
-    <div class="hero-content">
-      <p class="overline hero-eyebrow">
-        Chartered Accountants &amp; Advisors
-      </p>
+      <!-- Slider Viewport -->
+      <div class="hero-slider" id="heroSlider" role="region" aria-roledescription="carousel" aria-label="BGSS Key Practice Banners">
 
-      <h1 class="hero-title" aria-label="Clarity in Complexity. Confidence in Every Decision.">
-        <span class="hero-word"><span class="hero-word-inner">Clarity</span></span>
-        <span class="hero-word"><span class="hero-word-inner">in</span></span>
-        <span class="hero-word hero-line-break"><span class="hero-word-inner">Complexity.</span></span>
-        <span class="hero-word"><span class="hero-word-inner">Confidence</span></span>
-        <span class="hero-word"><span class="hero-word-inner">in</span></span>
-        <span class="hero-word"><span class="hero-word-inner">Every</span></span>
-        <span class="hero-word"><span class="hero-word-inner">Decision.</span></span>
-      </h1>
+        <!-- SLIDE 1: Strategic Corporate Tax Advisory -->
+        <div class="hero-slide active" role="group" aria-roledescription="slide" aria-label="1 of 4: Corporate Tax Advisory" data-slide-index="0">
+          <div class="hero-bg" aria-hidden="true">
+            <img src="/assets/images/hero-bg.jpg" alt="Corporate Tax Advisory &amp; Architecture" fetchpriority="high" decoding="async">
+          </div>
+          <div class="hero-overlay" aria-hidden="true"></div>
 
-      <p class="hero-sub">
-        Strategic tax, regulatory and business advisory solutions designed to help enterprises navigate complexity, unlock opportunities and achieve sustainable growth.
-      </p>
+          <div class="hero-content">
+            <div class="hero-floating-badge">
+              <span class="badge-icon"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></span>
+              <span class="badge-text">Strategic Tax Architecture</span>
+              <span class="badge-sep" aria-hidden="true"></span>
+              <span class="badge-stat">25+ Years Experience &bull; 500+ Clients</span>
+            </div>
 
-      <div class="hero-actions">
-        <a href="/services.php" class="btn btn-primary">
-          Explore Our Expertise
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-        <a href="/contact.php" class="btn btn-outline">
-          Connect With Our Team
-        </a>
+            <p class="overline hero-eyebrow">
+              <span class="eyebrow-pulsing-dot" aria-hidden="true"></span>
+              Chartered Accountants &amp; Advisors
+            </p>
+
+            <h1 class="hero-title" aria-label="Clarity in Complexity.">
+              <span class="hero-word"><span class="hero-word-inner">Clarity</span></span>
+              <span class="hero-word"><span class="hero-word-inner">in</span></span>
+              <span class="hero-word hero-line-break"><span class="hero-word-inner">Complexity.</span></span>
+            </h1>
+
+            <p class="hero-sub">
+              Strategic tax, regulatory and business advisory solutions designed to help enterprises navigate complexity, unlock opportunities and achieve sustainable growth.
+            </p>
+
+            <div class="hero-actions">
+              <a href="/services.php#tax-advisory" class="btn btn-primary">
+                Explore Our Expertise
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+              <a href="/contact.php" class="btn btn-outline">
+                Connect With Our Team
+              </a>
+            </div>
+          </div>
+        </div><!-- /slide 1 -->
+
+        <!-- SLIDE 2: Tax Litigation & Appellate Defense -->
+        <div class="hero-slide" role="group" aria-roledescription="slide" aria-label="2 of 4: Tax Litigation" data-slide-index="1">
+          <div class="hero-bg" aria-hidden="true">
+            <img src="/assets/images/service-litigation.jpg" alt="Tax Litigation &amp; Dispute Resolution" loading="lazy" decoding="async">
+          </div>
+          <div class="hero-overlay" aria-hidden="true"></div>
+
+          <div class="hero-content">
+            <div class="hero-floating-badge">
+              <span class="badge-icon"><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i></span>
+              <span class="badge-text">Appellate Litigation Defense</span>
+              <span class="badge-sep" aria-hidden="true"></span>
+              <span class="badge-stat">ITAT &bull; High Courts &bull; Supreme Court</span>
+            </div>
+
+            <p class="overline hero-eyebrow">
+              <span class="eyebrow-pulsing-dot" aria-hidden="true"></span>
+              Direct Tax Controversy &amp; Dispute Resolution
+            </p>
+
+            <h2 class="hero-title" aria-label="Defending Enterprise Value At Every Judicial Forum.">
+              <span class="hero-word"><span class="hero-word-inner">Defending</span></span>
+              <span class="hero-word"><span class="hero-word-inner">Enterprise</span></span>
+              <span class="hero-word hero-line-break"><span class="hero-word-inner">Value</span></span>
+              <span class="hero-word"><span class="hero-word-inner">At</span></span>
+              <span class="hero-word"><span class="hero-word-inner">Every</span></span>
+              <span class="hero-word"><span class="hero-word-inner">Judicial</span></span>
+              <span class="hero-word"><span class="hero-word-inner">Forum.</span></span>
+            </h2>
+
+            <p class="hero-sub">
+              Formidable representation and deep procedural expertise in high-stakes assessment disputes, appellate defenses, and landmark constitutional tax jurisprudence.
+            </p>
+
+            <div class="hero-actions">
+              <a href="/services.php#tax-litigation" class="btn btn-primary">
+                Litigation Capabilities
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+              <a href="/contact.php" class="btn btn-outline">
+                Schedule Case Evaluation
+              </a>
+            </div>
+          </div>
+        </div><!-- /slide 2 -->
+
+        <!-- SLIDE 3: International Transfer Pricing & FEMA -->
+        <div class="hero-slide" role="group" aria-roledescription="slide" aria-label="3 of 4: Transfer Pricing &amp; FEMA" data-slide-index="2">
+          <div class="hero-bg" aria-hidden="true">
+            <img src="/assets/images/service-transfer-pricing.jpg" alt="International Transfer Pricing &amp; FEMA Compliance" loading="lazy" decoding="async">
+          </div>
+          <div class="hero-overlay" aria-hidden="true"></div>
+
+          <div class="hero-content">
+            <div class="hero-floating-badge">
+              <span class="badge-icon"><i class="fa-solid fa-globe" aria-hidden="true"></i></span>
+              <span class="badge-text">Cross-Border &amp; Regulatory</span>
+              <span class="badge-sep" aria-hidden="true"></span>
+              <span class="badge-stat">15+ Jurisdictions &bull; OECD Alignment</span>
+            </div>
+
+            <p class="overline hero-eyebrow">
+              <span class="eyebrow-pulsing-dot" aria-hidden="true"></span>
+              Transfer Pricing, BEPS &amp; Foreign Exchange (FEMA)
+            </p>
+
+            <h2 class="hero-title" aria-label="Precision Architecture For Global Capital &amp; Pricing.">
+              <span class="hero-word"><span class="hero-word-inner">Precision</span></span>
+              <span class="hero-word"><span class="hero-word-inner">Architecture</span></span>
+              <span class="hero-word hero-line-break"><span class="hero-word-inner">For</span></span>
+              <span class="hero-word"><span class="hero-word-inner">Global</span></span>
+              <span class="hero-word"><span class="hero-word-inner">Capital</span></span>
+              <span class="hero-word"><span class="hero-word-inner">&amp;</span></span>
+              <span class="hero-word"><span class="hero-word-inner">Pricing.</span></span>
+            </h2>
+
+            <p class="hero-sub">
+              Defensible economic benchmarking, Advance Pricing Agreements (APAs), and comprehensive foreign exchange compliance under RBI regulations for multinational enterprises.
+            </p>
+
+            <div class="hero-actions">
+              <a href="/services.php#transfer-pricing" class="btn btn-primary">
+                Transfer Pricing Desk
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+              <a href="/services.php#fema-forex" class="btn btn-outline">
+                FEMA Regulatory Advisory
+              </a>
+            </div>
+          </div>
+        </div><!-- /slide 3 -->
+
+        <!-- SLIDE 4: Mergers, Acquisitions & Deal Structuring -->
+        <div class="hero-slide" role="group" aria-roledescription="slide" aria-label="4 of 4: M&amp;A Restructuring" data-slide-index="3">
+          <div class="hero-bg" aria-hidden="true">
+            <img src="/assets/images/service-ma.jpg" alt="Mergers &amp; Acquisitions Structuring" loading="lazy" decoding="async">
+          </div>
+          <div class="hero-overlay" aria-hidden="true"></div>
+
+          <div class="hero-content">
+            <div class="hero-floating-badge">
+              <span class="badge-icon"><i class="fa-solid fa-diagram-project" aria-hidden="true"></i></span>
+              <span class="badge-text">Transaction Structuring &amp; M&amp;A</span>
+              <span class="badge-sep" aria-hidden="true"></span>
+              <span class="badge-stat">Due Diligence &bull; NCLT Schemes</span>
+            </div>
+
+            <p class="overline hero-eyebrow">
+              <span class="eyebrow-pulsing-dot" aria-hidden="true"></span>
+              Mergers, Acquisitions &amp; Corporate Reorganization
+            </p>
+
+            <h2 class="hero-title" aria-label="Structuring Transformative Deals.">
+              <span class="hero-word"><span class="hero-word-inner">Structuring</span></span>
+              <span class="hero-word"><span class="hero-word-inner">Transformative</span></span>
+              <span class="hero-word hero-line-break"><span class="hero-word-inner">Deals.</span></span>
+            </h2>
+
+            <p class="hero-sub">
+              Tax-efficient transaction architecture, acquisition due diligence, slump sales, and court-approved corporate restructurings engineered for long-term stakeholder value.
+            </p>
+
+            <div class="hero-actions">
+              <a href="/services.php#mergers-acquisitions" class="btn btn-primary">
+                M&amp;A Capabilities
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+              <a href="/contact.php" class="btn btn-outline">
+                Discuss a Transaction
+              </a>
+            </div>
+          </div>
+        </div><!-- /slide 4 -->
+
+      </div><!-- /hero-slider -->
+
+      <!-- Slider Navigation Arrow Controls -->
+      <div class="hero-slider-controls">
+        <button class="hero-slider-btn prev" id="sliderPrevBtn" type="button" aria-label="Previous Slide">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button class="hero-slider-btn next" id="sliderNextBtn" type="button" aria-label="Next Slide">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
       </div>
-    </div><!-- /hero-content -->
 
+      <!-- Bottom Interactive Slide Bar (Tabs + Progress) -->
+      <div class="hero-slider-bottom">
+        <div class="hero-slider-bottom-inner">
+
+          <!-- Slide Numerical Counter -->
+          <div class="hero-slider-counter" aria-hidden="true">
+            <span class="slider-current-num" id="sliderCurrentNum">01</span>
+            <span class="slider-counter-divider">/</span>
+            <span class="slider-total-num">04</span>
+          </div>
+
+          <!-- Slide Tabs with Progress Bars -->
+          <div class="hero-slider-tabs" role="tablist" aria-label="Key Practice Areas">
+            <button class="hero-slider-tab active" role="tab" aria-selected="true" data-tab-index="0" aria-label="Slide 1: Corporate Tax Advisory">
+              <span class="tab-index">01</span>
+              <span class="tab-title">Corporate Tax Advisory</span>
+              <span class="tab-progress"><span class="tab-progress-bar"></span></span>
+            </button>
+            <button class="hero-slider-tab" role="tab" aria-selected="false" data-tab-index="1" aria-label="Slide 2: Tax Litigation &amp; Defense">
+              <span class="tab-index">02</span>
+              <span class="tab-title">Tax Litigation &amp; Defense</span>
+              <span class="tab-progress"><span class="tab-progress-bar"></span></span>
+            </button>
+            <button class="hero-slider-tab" role="tab" aria-selected="false" data-tab-index="2" aria-label="Slide 3: Transfer Pricing &amp; FEMA">
+              <span class="tab-index">03</span>
+              <span class="tab-title">Transfer Pricing &amp; FEMA</span>
+              <span class="tab-progress"><span class="tab-progress-bar"></span></span>
+            </button>
+            <button class="hero-slider-tab" role="tab" aria-selected="false" data-tab-index="3" aria-label="Slide 4: M&amp;A &amp; Deal Structuring">
+              <span class="tab-index">04</span>
+              <span class="tab-title">M&amp;A &amp; Deal Structuring</span>
+              <span class="tab-progress"><span class="tab-progress-bar"></span></span>
+            </button>
+          </div>
+
+          <!-- Play / Pause Button -->
+          <button class="hero-slider-playpause" id="sliderPlayPauseBtn" type="button" aria-label="Pause slideshow" title="Pause / Play Slideshow">
+            <i class="fa-solid fa-pause" id="sliderPlayPauseIcon" aria-hidden="true"></i>
+          </button>
+
+        </div>
+      </div>
+    </div><!-- /hero-canvas-frame -->
+
+    <!-- Scroll Down Indicator -->
     <div class="hero-scroll-indicator" aria-hidden="true">
       <span>Scroll</span>
       <div class="hero-scroll-line"></div>
     </div>
-
   </section><!-- /hero -->
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       SECTION 01.5 – PARTNERS' THOUGHT (AD TYPE CAROUSEL MATCHING SCREENSHOT)
+       ═══════════════════════════════════════════════════════ -->
+  <section class="partners-thoughts-section" id="partners-thoughts" aria-label="Partner Thoughts and Perspectives">
+    <div class="container">
+      <div class="partner-ad-container">
+
+        <!-- Carousel Viewport -->
+        <div class="partner-ad-viewport" id="adCarouselViewport">
+          <div class="partner-ad-track" id="adCarouselTrack">
+
+            <!-- Card 1: Bhaumik Goda -->
+            <article class="partner-ad-card" data-index="0">
+              <div class="partner-ad-card-top">
+                <div class="partner-ad-avatar">
+                  <img src="/assets/images/partner-bhaumik.jpg" alt="Bhaumik Goda" width="54" height="54" loading="lazy" decoding="async">
+                </div>
+                <span class="partner-ad-badge">Ad</span>
+              </div>
+              <h3 class="partner-ad-name">Bhaumik Goda</h3>
+              <p class="partner-ad-role">Corporate tax and M&amp;A</p>
+              <p class="partner-ad-quote">"Tax strategy is a core driver of corporate valuation and governance."</p>
+              <div class="partner-ad-tags">
+                <span class="partner-ad-tag">#CorporateTax</span>
+                <span class="partner-ad-tag">#M&amp;AStructuring</span>
+              </div>
+            </article>
+
+            <!-- Card 2: Saumya Sheth -->
+            <article class="partner-ad-card" data-index="1">
+              <div class="partner-ad-card-top">
+                <div class="partner-ad-avatar">
+                  <img src="/assets/images/partner-saumya.jpg" alt="Saumya Sheth" width="54" height="54" loading="lazy" decoding="async">
+                </div>
+                <span class="partner-ad-badge">Ad</span>
+              </div>
+              <h3 class="partner-ad-name">Saumya Sheth</h3>
+              <p class="partner-ad-role">Tax litigation and ITAT</p>
+              <p class="partner-ad-quote">"Victory is won by building an unassailable factual foundation."</p>
+              <div class="partner-ad-tags">
+                <span class="partner-ad-tag">#TaxLitigation</span>
+                <span class="partner-ad-tag">#ITATDefense</span>
+              </div>
+            </article>
+
+            <!-- Card 3: Shalibhadra Shah -->
+            <article class="partner-ad-card" data-index="2">
+              <div class="partner-ad-card-top">
+                <div class="partner-ad-avatar">
+                  <img src="/assets/images/partner-shalibhadra.jpg" alt="Shalibhadra Shah" width="54" height="54" loading="lazy" decoding="async">
+                </div>
+                <span class="partner-ad-badge">Ad</span>
+              </div>
+              <h3 class="partner-ad-name">Shalibhadra Shah</h3>
+              <p class="partner-ad-role">Transfer pricing and FEMA</p>
+              <p class="partner-ad-quote">"Documentation must be commercially defensible, not just benchmarked."</p>
+              <div class="partner-ad-tags">
+                <span class="partner-ad-tag">#TransferPricing</span>
+                <span class="partner-ad-tag">#FEMACompliance</span>
+              </div>
+            </article>
+
+            <!-- Card 4: Malay Kalavadia -->
+            <article class="partner-ad-card" data-index="3">
+              <div class="partner-ad-card-top">
+                <div class="partner-ad-avatar">
+                  <img src="/assets/images/partner-malay.jpg" alt="Malay Kalavadia" width="54" height="54" loading="lazy" decoding="async">
+                </div>
+                <span class="partner-ad-badge">Ad</span>
+              </div>
+              <h3 class="partner-ad-name">Malay Kalavadia</h3>
+              <p class="partner-ad-role">M&amp;A and restructuring</p>
+              <p class="partner-ad-quote">"The true success of an M&amp;A transaction lies where commercial ambition and tax architecture harmonize."</p>
+              <div class="partner-ad-tags">
+                <span class="partner-ad-tag">#M&amp;AStructuring</span>
+                <span class="partner-ad-tag">#DueDiligence</span>
+              </div>
+            </article>
+
+          </div><!-- /partner-ad-track -->
+        </div><!-- /partner-ad-viewport -->
+
+        <!-- Bottom Controls Matching Screenshot -->
+        <div class="partner-ad-bottom-bar">
+          <div class="partner-ad-pills" role="tablist" aria-label="Partner thoughts pagination">
+            <button class="partner-ad-pill active" role="tab" aria-selected="true" data-index="0" aria-label="Partner 1: Bhaumik Goda"></button>
+            <button class="partner-ad-pill" role="tab" aria-selected="false" data-index="1" aria-label="Partner 2: Saumya Sheth"></button>
+            <button class="partner-ad-pill" role="tab" aria-selected="false" data-index="2" aria-label="Partner 3: Shalibhadra Shah"></button>
+            <button class="partner-ad-pill" role="tab" aria-selected="false" data-index="3" aria-label="Partner 4: Malay Kalavadia"></button>
+          </div>
+
+          <div class="partner-ad-arrows">
+            <button class="partner-ad-arrow-btn prev" id="adPrevBtn" type="button" aria-label="Previous partner thought">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <button class="partner-ad-arrow-btn next" id="adNextBtn" type="button" aria-label="Next partner thought">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+          </div>
+        </div>
+
+      </div><!-- /partner-ad-container -->
+    </div>
+  </section>
 
 
   <!-- ═══════════════════════════════════════════════════════
