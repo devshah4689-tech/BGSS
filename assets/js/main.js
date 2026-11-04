@@ -67,7 +67,7 @@ function initCursor() {
   animateFollower();
 
   // Expand on interactive elements
-  const expandEls = qsa('a, button, [role="button"], .service-panel, .partner-card, input, textarea, select');
+  const expandEls = qsa('a, button, [role="button"], .service-panel, .partner-card, .partner-ad-card, .partner-ad-pill, .partner-ad-arrow-btn, .hero-slider-tab, input, textarea, select');
   expandEls.forEach(el => {
     on(el, 'mouseenter', () => document.body.classList.add('cursor-expanded'));
     on(el, 'mouseleave', () => document.body.classList.remove('cursor-expanded'));

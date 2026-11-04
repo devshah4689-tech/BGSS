@@ -12,6 +12,7 @@
   const canvas    = document.getElementById('intro-canvas');
   const skipBtn   = document.getElementById('intro-skip-btn');
   const stroke    = overlay.querySelector('.intro-logo-stroke');
+  const strokePaths = overlay.querySelectorAll('.intro-logo-stroke path');
   const fill      = overlay.querySelector('.intro-logo-fill');
   const shimmer   = overlay.querySelector('.intro-shimmer');
   const subtitle  = overlay.querySelector('.intro-subtitle');
@@ -61,9 +62,9 @@
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(230, 30, 80, ${p.alpha * 0.6})`;
+        ctx.fillStyle = `rgba(167, 37, 58, ${p.alpha * 0.6})`;
         ctx.shadowBlur = 6;
-        ctx.shadowColor = '#FF3366';
+        ctx.shadowColor = '#D2909B';
         ctx.fill();
       });
 
@@ -84,7 +85,14 @@
   }
 
   // Step 2: Laser stroke outline of BGSS draws in
-  if (stroke) {
+  if (strokePaths && strokePaths.length) {
+    masterTL.to(strokePaths, {
+      strokeDashoffset: 0,
+      duration: 1.5,
+      stagger: 0.12,
+      ease: 'power2.inOut',
+    }, 0.2);
+  } else if (stroke) {
     masterTL.to(stroke, {
       strokeDashoffset: 0,
       duration: 1.4,

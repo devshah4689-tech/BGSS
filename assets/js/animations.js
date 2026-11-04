@@ -49,9 +49,310 @@ function animateLoader() {
 }
 
 /* ═══════════════════════════════════════
-   02. CINEMATIC HERO SECTION
+   02. CINEMATIC HERO & 4-BANNER SLIDER
    ═══════════════════════════════════════ */
+function initHeroSlider() {
+  const slider = document.querySelector('.hero-slider');
+  if (!slider) return false;
+
+  const slides = Array.from(slider.querySelectorAll('.hero-slide'));
+  const tabs = Array.from(document.querySelectorAll('.hero-slider-tab'));
+  const prevBtn = document.getElementById('sliderPrevBtn');
+  const nextBtn = document.getElementById('sliderNextBtn');
+  const counterCurrent = document.getElementById('sliderCurrentNum');
+  const playPauseBtn = document.getElementById('sliderPlayPauseBtn');
+  const playPauseIcon = document.getElementById('sliderPlayPauseIcon');
+
+  if (!slides.length) return false;
+
+  let currentIndex = 0;
+  let isPlaying = true;
+  let progressRaf = null;
+  let progressStartTime = 0;
+  const DURATION = 6000; // 6 seconds per slide
+  let elapsedBeforePause = 0;
+  let isHovered = false;
+
+  function pad(num) {
+    return num < 10 ? '0' + num : '' + num;
+  }
+
+  function animateSlideContent(slideEl) {
+    if (reducedMotion) {
+      gsap.set(slideEl.querySelectorAll('.hero-slide-badge, .hero-eyebrow, .hero-title, .hero-word-inner, .hero-sub, .hero-actions .btn'), { opacity: 1, y: 0, yPercent: 0 });
+      return;
+    }
+
+    const badge = slideEl.querySelector('.hero-slide-badge');
+    const eyebrow = slideEl.querySelector('.hero-eyebrow');
+    const words = slideEl.querySelectorAll('.hero-title .hero-word-inner');
+    const title = slideEl.querySelector('.hero-title');
+    const sub = slideEl.querySelector('.hero-sub');
+    const btns = slideEl.querySelectorAll('.hero-actions .btn');
+    const bgImg = slideEl.querySelector('.hero-bg img');
+
+    if (bgImg) {
+      gsap.fromTo(bgImg, 
+        { scale: 1.14 },
+        { scale: 1.03, duration: 6.8, ease: 'power1.out' }
+      );
+    }
+
+    const tl = gsap.timeline({ delay: 0.1 });
+
+    if (badge) {
+      tl.fromTo(badge, 
+        { opacity: 0, y: -15, scale: 0.95 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.55, ease: 'back.out(1.5)' }
+      );
+    }
+
+    if (eyebrow) {
+      tl.fromTo(eyebrow,
+        { opacity: 0, y: 20, letterSpacing: '0.24em' },
+        { opacity: 1, y: 0, letterSpacing: '0.16em', duration: 0.65, ease: 'power3.out' },
+        '-=0.3'
+      );
+    }
+
+    if (words.length) {
+      tl.fromTo(words,
+        { yPercent: 120, opacity: 0 },
+        { yPercent: 0, opacity: 1, duration: 0.85, stagger: 0.04, ease: 'power4.out' },
+        '-=0.35'
+      );
+    } else if (title) {
+      tl.fromTo(title,
+        { opacity: 0, y: 35 },
+        { opacity: 1, y: 0, duration: 0.75, ease: 'power3.out' },
+        '-=0.35'
+      );
+    }
+
+    if (sub) {
+      tl.fromTo(sub,
+        { opacity: 0, y: 22 },
+        { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' },
+        '-=0.45'
+      );
+    }
+
+    if (btns.length) {
+      tl.fromTo(btns,
+        { opacity: 0, y: 20, scale: 0.94 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.55, stagger: 0.1, ease: 'back.out(1.3)' },
+        '-=0.35'
+      );
+    }
+  }
+
+  function resetProgress() {
+    if (progressRaf) {
+      cancelAnimationFrame(progressRaf);
+      progressRaf = null;
+    }
+    tabs.forEach(tab => {
+      const bar = tab.querySelector('.tab-progress-bar');
+      if (bar) bar.style.width = '0%';
+    });
+    elapsedBeforePause = 0;
+  }
+
+  function startProgress() {
+    if (!isPlaying || isHovered) return;
+    progressStartTime = performance.now() - elapsedBeforePause;
+
+    function step(now) {
+      const elapsed = now - progressStartTime;
+      const progress = Math.min(1, elapsed / DURATION);
+      const activeTab = tabs[currentIndex];
+      if (activeTab) {
+        const bar = activeTab.querySelector('.tab-progress-bar');
+        if (bar) bar.style.width = (progress * 100) + '%';
+      }
+
+      if (progress < 1) {
+        progressRaf = requestAnimationFrame(step);
+      } else {
+        elapsedBeforePause = 0;
+        const nextIndex = (currentIndex + 1) % slides.length;
+        goToSlide(nextIndex);
+      }
+    }
+
+    progressRaf = requestAnimationFrame(step);
+  }
+
+  function pauseProgress() {
+    if (progressRaf) {
+      cancelAnimationFrame(progressRaf);
+      progressRaf = null;
+    }
+    elapsedBeforePause = performance.now() - progressStartTime;
+  }
+
+  function resumeProgress() {
+    if (isPlaying && !isHovered) {
+      startProgress();
+    }
+  }
+
+  function goToSlide(newIndex) {
+    if (newIndex === currentIndex) return;
+
+    resetProgress();
+
+    const prevSlide = slides[currentIndex];
+    const nextSlide = slides[newIndex];
+
+    slides.forEach((s, idx) => {
+      if (idx !== currentIndex && idx !== newIndex) {
+        s.classList.remove('active');
+        s.style.zIndex = '1';
+        s.style.opacity = '0';
+        s.style.visibility = 'hidden';
+      }
+    });
+
+    prevSlide.classList.remove('active');
+    prevSlide.style.zIndex = '2';
+    gsap.to(prevSlide, {
+      opacity: 0,
+      duration: 0.65,
+      ease: 'power2.inOut',
+      onComplete: () => {
+        prevSlide.style.visibility = 'hidden';
+      }
+    });
+
+    nextSlide.classList.add('active');
+    nextSlide.style.zIndex = '3';
+    nextSlide.style.visibility = 'visible';
+    gsap.fromTo(nextSlide,
+      { opacity: 0 },
+      { opacity: 1, duration: 0.65, ease: 'power2.inOut' }
+    );
+
+    tabs.forEach((tab, idx) => {
+      const isActive = idx === newIndex;
+      tab.classList.toggle('active', isActive);
+      tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      const bar = tab.querySelector('.tab-progress-bar');
+      if (bar && !isActive) bar.style.width = '0%';
+    });
+
+    if (counterCurrent) {
+      counterCurrent.textContent = pad(newIndex + 1);
+    }
+
+    currentIndex = newIndex;
+    animateSlideContent(nextSlide);
+
+    startProgress();
+  }
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      const prev = (currentIndex - 1 + slides.length) % slides.length;
+      goToSlide(prev);
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      const next = (currentIndex + 1) % slides.length;
+      goToSlide(next);
+    });
+  }
+
+  tabs.forEach((tab, idx) => {
+    tab.addEventListener('click', () => {
+      goToSlide(idx);
+    });
+  });
+
+  if (playPauseBtn) {
+    playPauseBtn.addEventListener('click', () => {
+      isPlaying = !isPlaying;
+      if (isPlaying) {
+        playPauseBtn.setAttribute('aria-label', 'Pause slideshow');
+        if (playPauseIcon) {
+          playPauseIcon.classList.remove('fa-play');
+          playPauseIcon.classList.add('fa-pause');
+        }
+        startProgress();
+      } else {
+        playPauseBtn.setAttribute('aria-label', 'Play slideshow');
+        if (playPauseIcon) {
+          playPauseIcon.classList.remove('fa-pause');
+          playPauseIcon.classList.add('fa-play');
+        }
+        pauseProgress();
+      }
+    });
+  }
+
+  const heroSection = document.querySelector('.hero');
+  if (heroSection) {
+    heroSection.addEventListener('mouseenter', () => {
+      isHovered = true;
+      pauseProgress();
+    });
+    heroSection.addEventListener('mouseleave', () => {
+      isHovered = false;
+      resumeProgress();
+    });
+
+    let touchStartX = 0;
+    let touchEndX = 0;
+    heroSection.addEventListener('touchstart', e => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    heroSection.addEventListener('touchend', e => {
+      touchEndX = e.changedTouches[0].screenX;
+      const swipeDist = touchEndX - touchStartX;
+      if (Math.abs(swipeDist) > 45) {
+        if (swipeDist < 0) {
+          goToSlide((currentIndex + 1) % slides.length);
+        } else {
+          goToSlide((currentIndex - 1 + slides.length) % slides.length);
+        }
+      }
+    }, { passive: true });
+  }
+
+  window.addEventListener('keydown', e => {
+    if (document.activeElement && ['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
+    if (e.key === 'ArrowLeft') {
+      goToSlide((currentIndex - 1 + slides.length) % slides.length);
+    } else if (e.key === 'ArrowRight') {
+      goToSlide((currentIndex + 1) % slides.length);
+    }
+  });
+
+  animateSlideContent(slides[0]);
+  startProgress();
+  return true;
+}
+
 function animateHero() {
+  const isSlider = initHeroSlider();
+  if (isSlider) {
+    // Parallax & scroll effects for hero slider
+    gsap.to('.hero-slide .hero-bg', {
+      yPercent: isMobile ? 8 : 18,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '.hero',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: 1.2,
+      }
+    });
+    return;
+  }
+
   if (reducedMotion) {
     gsap.set(['.hero-eyebrow', '.hero-title', '.hero-sub', '.hero-actions', '.hero-scroll-indicator'], { opacity: 1 });
     return;
@@ -555,7 +856,7 @@ function initScrollProgress() {
       left:       '0',
       height:     '3px',
       width:      '0%',
-      background: 'linear-gradient(90deg, #C8102E 0%, #FF7A1E 100%)',
+      background: 'linear-gradient(90deg, #A7253A 0%, #D2909B 100%)',
       zIndex:     '9999',
       transition: 'none',
       pointerEvents: 'none',
@@ -610,6 +911,131 @@ function initNavScrollTracking() {
 }
 
 /* ═══════════════════════════════════════
+   PARTNERS' THOUGHT (AD TYPE) CAROUSEL & ANIMATION
+   ═══════════════════════════════════════ */
+function initPartnerAdCarousel() {
+  const track = document.getElementById('adCarouselTrack');
+  const viewport = document.getElementById('adCarouselViewport');
+  const pills = Array.from(document.querySelectorAll('.partner-ad-pill'));
+  const prevBtn = document.getElementById('adPrevBtn');
+  const nextBtn = document.getElementById('adNextBtn');
+
+  if (!track || !viewport) return;
+
+  const cards = Array.from(track.querySelectorAll('.partner-ad-card'));
+  if (!cards.length) return;
+
+  let currentIndex = 0;
+
+  function getVisibleCount() {
+    const w = window.innerWidth;
+    if (w <= 600) return 1;
+    if (w <= 992) return 2;
+    return 3;
+  }
+
+  function getMaxIndex() {
+    const visible = getVisibleCount();
+    return Math.max(0, cards.length - visible);
+  }
+
+  function updateCarousel(idx) {
+    const maxIdx = getMaxIndex();
+    currentIndex = Math.max(0, Math.min(idx, maxIdx));
+
+    const card = cards[0];
+    const gap = 18;
+    const cardWidth = card.offsetWidth;
+    const offset = currentIndex * (cardWidth + gap);
+
+    track.style.transform = `translateX(-${offset}px)`;
+
+    pills.forEach((pill, i) => {
+      const isActive = (i === currentIndex) || (currentIndex === maxIdx && i >= maxIdx);
+      pill.classList.toggle('active', isActive);
+      pill.setAttribute('aria-selected', isActive ? 'true' : 'false');
+    });
+
+    if (prevBtn) prevBtn.disabled = (currentIndex === 0);
+    if (nextBtn) nextBtn.disabled = (currentIndex >= maxIdx);
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      const maxIdx = getMaxIndex();
+      if (currentIndex < maxIdx) {
+        updateCarousel(currentIndex + 1);
+      } else {
+        updateCarousel(0); // loop
+      }
+    });
+  }
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      const maxIdx = getMaxIndex();
+      if (currentIndex > 0) {
+        updateCarousel(currentIndex - 1);
+      } else {
+        updateCarousel(maxIdx); // loop
+      }
+    });
+  }
+
+  pills.forEach((pill, i) => {
+    pill.addEventListener('click', () => {
+      updateCarousel(i);
+    });
+  });
+
+  // Touch Swipe Support
+  let startX = 0;
+  viewport.addEventListener('touchstart', e => {
+    startX = e.changedTouches[0].screenX;
+  }, { passive: true });
+
+  viewport.addEventListener('touchend', e => {
+    const endX = e.changedTouches[0].screenX;
+    const diff = endX - startX;
+    if (Math.abs(diff) > 35) {
+      if (diff < 0) {
+        updateCarousel(currentIndex + 1);
+      } else {
+        updateCarousel(currentIndex - 1);
+      }
+    }
+  }, { passive: true });
+
+  window.addEventListener('resize', () => {
+    updateCarousel(currentIndex);
+  }, { passive: true });
+
+  updateCarousel(0);
+}
+
+function animatePartnersThoughts() {
+  initPartnerAdCarousel();
+
+  if (reducedMotion) return;
+  const section = document.querySelector('.partners-thoughts-section');
+  if (!section) return;
+
+  const container = document.querySelector('.partner-ad-container');
+  if (container) {
+    gsap.fromTo(container,
+      { opacity: 0, y: 35 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.85,
+        ease: 'power3.out',
+        scrollTrigger: st('.partners-thoughts-section', { start: 'top 85%' })
+      }
+    );
+  }
+}
+
+/* ═══════════════════════════════════════
    INIT ALL
    ═══════════════════════════════════════ */
 function initAllAnimations() {
@@ -623,6 +1049,7 @@ function initAllAnimations() {
 
   animateSectionTitles();
   animateLines();
+  animatePartnersThoughts();
   animateAbout();
   animateServices();
   animatePartners();
