@@ -16,7 +16,7 @@
      DATA REPOSITORY: EBOOKS, PRESENTATIONS & VIDEOS
      ========================================================================== */
 
-  const EBOOKS_DATA = [
+  let EBOOKS_DATA = [
     {
       id: 'tax-litigation-handbook',
       title: 'Mastering Direct Tax Litigation & ITAT Appellate Practice',
@@ -121,7 +121,7 @@
                 <p>✔ <strong>Day 14:</strong> Jurisdictional objections raised in writing prior to merits.</p>
                 <p>✔ <strong>Day 30:</strong> Protective stay application filed with 20% statutory deposit arguments.</p>
               </div>
-              <p style="margin-top:1rem; font-size:0.8rem; color:#64748B;">For dedicated litigation advisory: <a href="mailto:info@bgssassociates.com" style="color:#A7253A; font-weight:600;">info@bgssassociates.com</a></p>
+              <p style="margin-top:1rem; font-size:0.8rem; color:#64748B;">For dedicated litigation advisory: <a href="mailto:devshah4689@gmail.com" style="color:#A7253A; font-weight:600;">devshah4689@gmail.com</a></p>
             `,
             footer: 'BGSS & Associates • Knowledge Bank'
           }
@@ -280,7 +280,7 @@
     }
   ];
 
-  const PRESENTATIONS_DATA = [
+  let PRESENTATIONS_DATA = [
     {
       id: 'pres-itat-defense',
       title: 'Tax Controversy & Appellate Defense Strategies at ITAT',
@@ -535,7 +535,7 @@
     }
   ];
 
-  const VIDEOS_DATA = [
+  let VIDEOS_DATA = [
     {
       id: 'video-1',
       youtubeId: '3fumBcKC6RE', // High-quality educational tax masterclass embed
@@ -1380,13 +1380,116 @@
     setupQuickSearch();
   }
 
+  function mergeAdminResources() {
+    try {
+      const raw = localStorage.getItem('bgss_admin_data');
+      if (!raw) return;
+      const data = JSON.parse(raw);
+      if (!data.resources) return;
+
+      // 1. Custom YouTube Videos
+      if (Array.isArray(data.resources.videos) && data.resources.videos.length) {
+        const liveVideos = data.resources.videos.filter(v => v.published !== false);
+        const mappedVideos = liveVideos.map((v, i) => {
+          let ytId = '';
+          const match = (v.url || '').match(/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/);
+          if (match) ytId = match[1];
+          return {
+            id: v.id || `custom-video-${i}`,
+            youtubeId: ytId || '3fumBcKC6RE',
+            title: v.title,
+            speaker: 'BGSS Advisory Panel',
+            badge: v.category || 'Expert Briefing',
+            duration: 'Keynote',
+            views: 'New Release',
+            tags: [v.category || 'Tax Advisory', 'Video Analysis'],
+            desc: v.description || 'Exclusive briefing and strategic analysis by BGSS & Associates chartered accountants.'
+          };
+        });
+        VIDEOS_DATA = [...mappedVideos, ...VIDEOS_DATA];
+      }
+
+      // 2. Custom eBooks
+      if (Array.isArray(data.resources.ebooks) && data.resources.ebooks.length) {
+        const liveEbooks = data.resources.ebooks.filter(e => e.published !== false);
+        const mappedEbooks = liveEbooks.map((e, i) => ({
+          id: e.id || `custom-ebook-${i}`,
+          title: e.title,
+          author: 'BGSS Research Bureau',
+          theme: 'theme-gold',
+          badge: `${e.category || 'Special Report'} • ${e.date ? e.date.slice(0,4) : '2024'} Edition`,
+          year: e.date ? e.date.slice(0,4) : '2024',
+          pagesCount: 4,
+          tags: [e.category || 'Advisory', 'Special Release'],
+          summary: e.description || 'Comprehensive analytical monograph prepared by BGSS & Associates.',
+          downloadUrl: e.url || '#',
+          pages: [
+            {
+              left: {
+                header: `BGSS Research • ${e.category || 'Advisory'}`,
+                body: `<div style="text-align:center;padding:2rem 1rem;">
+                  <div style="font-size:0.75rem;letter-spacing:0.18em;text-transform:uppercase;color:#B8860B;font-weight:700;margin-bottom:1rem;">Executive Monograph</div>
+                  <h3 style="font-size:1.5rem;color:#0D1B2A;line-height:1.25;margin-bottom:1rem;">${e.title}</h3>
+                  <p style="font-size:0.85rem;color:#64748B;">${e.description || 'Strategic insights and technical guidance.'}</p>
+                </div>`,
+                footer: 'BGSS & Associates • Practice Insights'
+              },
+              right: {
+                header: 'Executive Overview',
+                body: `<h3>Monograph Summary</h3>
+                <p>${e.description || 'This monograph is part of the BGSS Knowledge Bank series.'}</p>
+                ${e.url ? `<div style="margin-top:1.5rem;"><a href="${e.url}" target="_blank" class="kb-action-btn" style="background:#0D1B2A;color:#fff;padding:8px 16px;border-radius:4px;text-decoration:none;font-size:0.85rem;display:inline-block;">Open / Download Resource &rarr;</a></div>` : ''}`,
+                footer: 'Page 1 of 2'
+              }
+            }
+          ]
+        }));
+        EBOOKS_DATA = [...mappedEbooks, ...EBOOKS_DATA];
+      }
+
+      // 3. Custom Presentations
+      if (Array.isArray(data.resources.presentations) && data.resources.presentations.length) {
+        const livePres = data.resources.presentations.filter(p => p.published !== false);
+        const mappedPres = livePres.map((p, i) => ({
+          id: p.id || `custom-pres-${i}`,
+          title: p.title,
+          badge: `${p.category || 'Executive Briefing'} • ${p.date ? p.date.slice(0,4) : '2024'}`,
+          presenter: 'BGSS Advisory Panel',
+          duration: 'Presentation Slide Deck',
+          category: p.category || 'General Advisory',
+          desc: p.description || 'Curated presentation slide deck on current tax and corporate regulatory developments.',
+          downloadUrl: p.url || '#',
+          slides: [
+            {
+              slideNum: 1,
+              title: p.title,
+              subtitle: 'BGSS & Associates Presentation Series',
+              category: p.category || 'Advisory',
+              content: `<div style="padding:1.5rem;text-align:center;">
+                <h2 style="font-size:1.8rem;color:#0D1B2A;margin-bottom:1rem;">${p.title}</h2>
+                <p style="color:#64748B;font-size:1rem;max-width:550px;margin:0 auto 1.5rem auto;">${p.description || 'Special slide deck.'}</p>
+                ${p.url ? `<a href="${p.url}" target="_blank" style="background:#B8860B;color:#fff;padding:10px 22px;border-radius:4px;text-decoration:none;font-weight:600;display:inline-block;">View / Download Presentation &rarr;</a>` : ''}
+                ${p.embed ? `<div style="margin-top:1.5rem;">${p.embed}</div>` : ''}
+              </div>`
+            }
+          ]
+        }));
+        PRESENTATIONS_DATA = [...mappedPres, ...PRESENTATIONS_DATA];
+      }
+    } catch(err) {
+      console.error('mergeAdminResources error:', err);
+    }
+  }
+
   // Self Initialization on DOM Ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
+      mergeAdminResources();
       renderSlide();
       initEventListeners();
     });
   } else {
+    mergeAdminResources();
     renderSlide();
     initEventListeners();
   }

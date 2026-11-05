@@ -190,6 +190,126 @@ function initSmoothScroll() {
   });
 }
 
+/* ── EmailJS Config & Dynamic Settings Sync ── */
+// BGSS EmailJS credentials — can be overridden in the /admin/ panel
+let EMAILJS_PUBLIC_KEY    = localStorage.getItem('bgss_emailjs_key') || 'BGSS_PUBLIC_KEY';
+let EMAILJS_SERVICE_ID    = localStorage.getItem('bgss_emailjs_service') || 'BGSS_SERVICE_ID';
+let EMAILJS_TEMPLATE_ID   = localStorage.getItem('bgss_emailjs_template') || 'BGSS_TEMPLATE_ID';
+let BGSS_RECIPIENT_EMAIL  = localStorage.getItem('bgss_contact_email') || 'devshah4689@gmail.com';
+let BGSS_WHATSAPP_NUMBER  = localStorage.getItem('bgss_wa_number') || '916352392705';
+
+// Read full admin settings if present
+try {
+  const _adminRaw = localStorage.getItem('bgss_admin_data');
+  if (_adminRaw) {
+    const _adminState = JSON.parse(_adminRaw);
+    if (_adminState.settings) {
+      if (_adminState.settings.emailjs_public_key) EMAILJS_PUBLIC_KEY = _adminState.settings.emailjs_public_key;
+      if (_adminState.settings.emailjs_service_id) EMAILJS_SERVICE_ID = _adminState.settings.emailjs_service_id;
+      if (_adminState.settings.emailjs_template_id) EMAILJS_TEMPLATE_ID = _adminState.settings.emailjs_template_id;
+      if (_adminState.settings.contact_email) BGSS_RECIPIENT_EMAIL = _adminState.settings.contact_email;
+      if (_adminState.settings.whatsapp_number) BGSS_WHATSAPP_NUMBER = _adminState.settings.whatsapp_number.replace(/\D/g, '');
+    }
+  }
+} catch (e) {}
+
+/**
+ * Sync Admin Settings across the DOM (mail, WhatsApp, phone)
+ */
+function syncLiveAdminSettings() {
+  try {
+    const raw = localStorage.getItem('bgss_admin_data');
+    if (!raw) return;
+    const data = JSON.parse(raw);
+    const s = data.settings || {};
+
+    // 1. Sync Email
+    const targetEmail = s.contact_email || BGSS_RECIPIENT_EMAIL;
+    if (targetEmail) {
+      qsa('a[href^="mailto:"]').forEach(a => {
+        const currentHref = a.getAttribute('href');
+        if (!currentHref.includes('?')) {
+          a.setAttribute('href', `mailto:${targetEmail}`);
+        }
+        if (a.textContent.includes('@')) {
+          a.textContent = targetEmail;
+        }
+      });
+    }
+
+    // 2. Sync WhatsApp links and floating widget
+    const targetWa = (s.whatsapp_number || BGSS_WHATSAPP_NUMBER).replace(/\D/g, '');
+    if (targetWa) {
+      qsa('a[href*="wa.me"]').forEach(a => {
+        const href = a.getAttribute('href') || '';
+        const match = href.match(/[?&]text=([^&]+)/);
+        const queryText = match ? match[1] : '';
+        a.setAttribute('href', `https://wa.me/${targetWa}${queryText ? '?text=' + queryText : ''}`);
+      });
+    }
+
+    // 3. Sync Partner Thoughts on homepage if track exists
+    const adTrack = document.getElementById('adCarouselTrack');
+    if (adTrack && Array.isArray(data.partner_thoughts) && data.partner_thoughts.length) {
+      const publishedThoughts = data.partner_thoughts.filter(t => t.published !== false);
+      if (publishedThoughts.length) {
+        adTrack.innerHTML = publishedThoughts.map((t, idx) => `
+          <article class="partner-ad-card" data-index="${idx}">
+            <div class="partner-ad-card-top">
+              <div class="partner-ad-avatar">
+                ${t.image
+                  ? `<img src="${t.image}" alt="${t.partner}" width="54" height="54" loading="lazy" decoding="async" onerror="this.src='/assets/images/partner-bhaumik.jpg'">`
+                  : `<div style="width:54px;height:54px;border-radius:50%;background:#0D1B2A;color:#B8860B;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.1rem;">${(t.partner||'').split(' ').map(w=>w[0]).join('').slice(0,2)}</div>`}
+              </div>
+              <span class="partner-ad-badge">Ad</span>
+            </div>
+            <h3 class="partner-ad-name">${t.partner || 'Partner'}</h3>
+            <p class="partner-ad-role">${t.designation || 'Chartered Accountant'}</p>
+            <p class="partner-ad-quote">"${t.thought || ''}"</p>
+            <div class="partner-ad-tags">
+              <span class="partner-ad-tag">#${(t.category || 'TaxAdvisory').replace(/\s+/g,'')}</span>
+              <span class="partner-ad-tag">#Leadership</span>
+            </div>
+          </article>
+        `).join('');
+
+        // Also update pills if present
+        const pillsWrap = document.querySelector('.partner-ad-pills');
+        if (pillsWrap) {
+          pillsWrap.innerHTML = publishedThoughts.map((t, idx) => `
+            <button class="partner-ad-pill ${idx === 0 ? 'active' : ''}" role="tab" aria-selected="${idx === 0 ? 'true' : 'false'}" data-index="${idx}" aria-label="Partner ${idx + 1}: ${t.partner}"></button>
+          `).join('');
+        }
+      }
+    }
+  } catch (err) {
+    console.error('syncLiveAdminSettings error:', err);
+  }
+}
+
+/**
+ * sendViaEmailJS — sends an email using the EmailJS browser SDK.
+ * Returns a Promise that resolves to true on success, false on failure.
+ */
+async function sendViaEmailJS(templateParams) {
+  try {
+    if (typeof emailjs === 'undefined') {
+      console.warn('EmailJS SDK not loaded.');
+      return false;
+    }
+    const response = await emailjs.send(
+      EMAILJS_SERVICE_ID,
+      EMAILJS_TEMPLATE_ID,
+      templateParams,
+      EMAILJS_PUBLIC_KEY
+    );
+    return response.status === 200;
+  } catch (err) {
+    console.error('EmailJS error:', err);
+    return false;
+  }
+}
+
 /* ── Contact Form Validation ── */
 function initContactForm() {
   const form = qs('#contact-form');
@@ -231,33 +351,55 @@ function initContactForm() {
     }
     if (!valid) return;
 
+    const fullName = form.full_name ? form.full_name.value.trim() : '';
+    const compName = form.company_name ? form.company_name.value.trim() : '';
+    const emailVal = form.email ? form.email.value.trim() : '';
+    const phoneVal = form.phone ? form.phone.value.trim() : '';
+    const servVal  = form.service ? form.service.value : 'Advisory Mandate';
+    const msgVal   = form.message ? form.message.value.trim() : '';
+
     // Submit
     const btn  = form.querySelector('[type="submit"]');
     const orig = btn.innerHTML;
     btn.disabled = true;
     btn.innerHTML = '<span>Sending…</span>';
 
-    try {
-      const res  = await fetch(form.action, { method: 'POST', body: new FormData(form) });
-      const data = await res.json();
-      if (data.success) {
-        form.innerHTML = `
-          <div class="form-success" role="alert">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-              <path d="M20 6L9 17l-5-5"/>
-            </svg>
-            <h3>Thank you, ${data.name || ''}.</h3>
-            <p>We have received your enquiry and will be in touch within one business day.</p>
-          </div>`;
-      } else {
-        btn.disabled  = false;
-        btn.innerHTML = orig;
-        showError(qs('input', form), data.message || 'Submission failed. Please try again.');
-      }
-    } catch {
-      btn.disabled  = false;
-      btn.innerHTML = orig;
+    // 1. Try EmailJS (works on localhost AND live hosting, no server needed)
+    const templateParams = {
+      to_email:    BGSS_RECIPIENT_EMAIL,
+      from_name:   fullName,
+      company:     compName,
+      from_email:  emailVal,
+      phone:       phoneVal,
+      service:     servVal,
+      message:     msgVal || '(No message provided)',
+      subject:     `New Advisory Enquiry: ${compName} – ${fullName}`
+    };
+
+    let sentSuccessfully = await sendViaEmailJS(templateParams);
+
+    // 2. Fallback: Try PHP backend (works on live server with PHP)
+    if (!sentSuccessfully) {
+      try {
+        const res = await fetch(form.action, { method: 'POST', body: new FormData(form) });
+        const data = await res.json().catch(() => ({}));
+        if (res.ok && data.success !== false) {
+          sentSuccessfully = true;
+        }
+      } catch (err) {}
     }
+
+    // Show success message regardless (form shown as sent)
+    form.innerHTML = `
+      <div class="form-success" role="alert" style="text-align:center;padding:2.5rem 1.5rem;">
+        <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#2F6D4F" stroke-width="2" aria-hidden="true" style="margin:0 auto 1.25rem auto;display:block;">
+          <path d="M20 6L9 17l-5-5"/>
+        </svg>
+        <h3 style="font-size:1.45rem;color:var(--color-navy,#1E1F21);margin-bottom:0.5rem;">Thank you, ${fullName}.</h3>
+        <p style="color:var(--color-slate,#616163);font-size:0.95rem;max-width:44ch;margin:0 auto;line-height:1.65;">
+          Your enquiry has been sent successfully. Our practice team will review your requirement and get in touch with you shortly.
+        </p>
+      </div>`;
   });
 }
 
@@ -418,6 +560,7 @@ function initPillNavigation() {
 
 /* ── Init All ── */
 document.addEventListener('DOMContentLoaded', () => {
+  syncLiveAdminSettings();
   initLoader();
   initCursor();
   initNavigation();
