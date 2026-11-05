@@ -1,13 +1,13 @@
 /* ============================================================
-   BGSS & Associates – Cinematic Logo Animation Intro
-   intro-animation.css | High-end CXO Brand Motion Experience
+   BGSS & Associates – Cinematic CA Firm Video Intro Animation
+   intro-animation.css | Prestigious Chartered Accountancy Motion Experience
    ============================================================ */
 
 #logo-intro-overlay {
   position: fixed;
   inset: 0;
   z-index: 99999;
-  background: #04070D;
+  background: radial-gradient(circle at center, #0B1422 0%, #050A12 60%, #020408 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -22,6 +22,19 @@
   display: none !important;
 }
 
+/* ── Geometric Financial Grid Pattern ── */
+.intro-grid-pattern {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(184, 134, 11, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(184, 134, 11, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  background-position: center center;
+  pointer-events: none;
+  z-index: 1;
+}
+
 /* ── Particle & Ambient Background ── */
 .intro-canvas-bg {
   position: absolute;
@@ -34,25 +47,40 @@
 
 .intro-ambient-glow {
   position: absolute;
-  width: min(650px, 90vw);
-  height: min(650px, 90vw);
+  width: min(720px, 92vw);
+  height: min(720px, 92vw);
   border-radius: 50%;
-  background: radial-gradient(circle at center, rgba(167, 37, 58, 0.22) 0%, rgba(137, 30, 48, 0.08) 45%, transparent 70%);
-  filter: blur(50px);
+  background: radial-gradient(circle at center, rgba(184, 134, 11, 0.16) 0%, rgba(167, 37, 58, 0.12) 40%, transparent 70%);
+  filter: blur(65px);
   z-index: 1;
   pointer-events: none;
   transform: translate(-50%, -50%);
   top: 50%;
   left: 50%;
-  animation: introGlowPulse 4s ease-in-out infinite alternate;
+  animation: introGlowPulse 4.5s ease-in-out infinite alternate;
 }
 
 @keyframes introGlowPulse {
-  0% { transform: translate(-50%, -50%) scale(0.85); opacity: 0.6; }
+  0% { transform: translate(-50%, -50%) scale(0.88); opacity: 0.65; }
   100% { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
 }
 
-/* ── Logo Container ── */
+/* ── Anamorphic Lens Flare Sweep ── */
+.intro-anamorphic-flare {
+  position: absolute;
+  top: 50%;
+  left: -120%;
+  width: 140%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent 0%, rgba(184, 134, 11, 0.3) 30%, #FFFFFF 50%, rgba(167, 37, 58, 0.4) 70%, transparent 100%);
+  box-shadow: 0 0 25px 4px rgba(212, 168, 67, 0.8), 0 0 60px 8px rgba(167, 37, 58, 0.6);
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(-50%);
+}
+
+/* ── Main Stage Content ── */
 .intro-content {
   position: relative;
   z-index: 2;
@@ -61,15 +89,61 @@
   align-items: center;
   text-align: center;
   padding: 1.5rem;
-  max-width: 900px;
+  max-width: 950px;
 }
 
-/* ── SVG Logo Wordmark ── */
+/* ── CA Crest Emblem: Scales of Justice ── */
+.intro-ca-crest {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+  opacity: 0;
+  transform: scale(0.82) translateY(-10px);
+}
+
+.intro-crest-svg {
+  width: clamp(70px, 9vw, 95px);
+  height: clamp(70px, 9vw, 95px);
+  filter: drop-shadow(0 0 16px rgba(184, 134, 11, 0.65)) drop-shadow(0 0 32px rgba(212, 168, 67, 0.35));
+}
+
+.crest-stroke {
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+}
+
+.crest-beam {
+  stroke-dasharray: 200;
+  stroke-dashoffset: 200;
+}
+
+.crest-path {
+  opacity: 0;
+  transform-origin: center;
+}
+
+.intro-crest-label {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: clamp(0.58rem, 0.9vw, 0.72rem);
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: #D4A843; /* Rich Gold */
+  margin-top: 0.5rem;
+  text-shadow: 0 0 12px rgba(184, 134, 11, 0.5);
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+/* ── SVG Brand Wordmark ── */
 .intro-svg-wrap {
   position: relative;
-  width: min(500px, 86vw);
+  width: min(440px, 82vw);
   height: auto;
   overflow: hidden;
+  margin: 0 auto;
 }
 
 .intro-logo-svg {
@@ -81,21 +155,13 @@
 /* Laser stroke drawing (vector paths) */
 .intro-logo-stroke path {
   fill: none;
-  stroke: #A7253A;
+  stroke: #B8860B;
   stroke-width: 48px;
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-dasharray: 6500;
   stroke-dashoffset: 6500;
-  filter: drop-shadow(0 0 16px rgba(167, 37, 58, 0.95)) drop-shadow(0 0 32px rgba(210, 144, 155, 0.6));
-}
-
-.intro-logo-stroke:not(g) {
-  fill: none;
-  stroke: #A7253A;
-  stroke-width: 2px;
-  stroke-dasharray: 600;
-  stroke-dashoffset: 600;
+  filter: drop-shadow(0 0 16px rgba(184, 134, 11, 0.95)) drop-shadow(0 0 32px rgba(212, 168, 67, 0.6));
 }
 
 /* Solid Fill (vector paths) */
@@ -118,7 +184,7 @@
   background: linear-gradient(
     105deg,
     transparent 30%,
-    rgba(255, 255, 255, 0.75) 50%,
+    rgba(255, 255, 255, 0.85) 50%,
     transparent 70%
   );
   transform: skewX(-25deg);
@@ -126,37 +192,108 @@
   mix-blend-mode: overlay;
 }
 
-/* ── Subtitle & Taglines ── */
-.intro-subtitle {
-  font-family: var(--font-body, 'Inter', sans-serif);
-  font-size: clamp(0.75rem, 1.6vw, 1rem);
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: #DFE0E0; /* Brand Guidelines Secondary Silver */
-  margin-top: 1.5rem;
+/* ── Firm Title & Typography ── */
+.intro-firm-title {
+  font-family: 'Fraunces', 'Georgia', serif;
+  font-size: clamp(1.4rem, 3.4vw, 2.3rem);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #FFFFFF;
+  margin-top: 1rem;
   opacity: 0;
-  transform: translateY(15px);
+  transform: translateY(12px);
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.8);
 }
 
+.intro-subtitle {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: clamp(0.7rem, 1.4vw, 0.88rem);
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #D4A843; /* Chartered Accountant Gold */
+  margin-top: 0.4rem;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+/* ── Gold Divider with Central Diamond ── */
 .intro-divider {
   position: relative;
   width: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #A7253A 25%, #D2909B 50%, #A7253A 75%, transparent);
-  margin: 1.25rem auto;
-  box-shadow: 0 0 14px rgba(167, 37, 58, 0.85);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #B8860B 25%, #FFFFFF 50%, #B8860B 75%, transparent);
+  margin: 1.15rem auto;
+  box-shadow: 0 0 16px rgba(184, 134, 11, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+.intro-divider-gem {
+  color: #D4A843;
+  font-size: 0.65rem;
+  transform: scale(0) rotate(45deg);
+  opacity: 0;
+  filter: drop-shadow(0 0 8px rgba(184, 134, 11, 0.9));
+}
+
+/* ── Key CA Practice Pillars Reveal ── */
+.intro-pillars-ticker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.85rem;
+  margin: 0.75rem auto 1rem;
+  max-width: 820px;
+}
+
+.intro-pillar-item {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: clamp(0.6rem, 0.95vw, 0.72rem);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #E2E8F0;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(184, 134, 11, 0.25);
+  padding: 3px 10px;
+  border-radius: 4px;
+  opacity: 0;
+  transform: translateY(8px);
+  backdrop-filter: blur(4px);
+  transition: border-color 0.3s;
+}
+
+.intro-pillar-sep {
+  color: #B8860B;
+  font-size: 0.75rem;
+  opacity: 0;
+}
+
+/* ── Corporate Tagline & Jurisdiction ── */
 .intro-tagline {
   font-family: var(--font-body, 'Inter', sans-serif);
-  font-size: clamp(0.6875rem, 1.2vw, 0.82rem);
-  font-weight: 400;
-  letter-spacing: 0.22em;
+  font-size: clamp(0.65rem, 1.1vw, 0.78rem);
+  font-weight: 500;
+  letter-spacing: 0.26em;
   text-transform: uppercase;
-  color: rgba(223, 224, 224, 0.75); /* Soft Silver */
+  color: rgba(226, 232, 240, 0.75);
   opacity: 0;
-  transform: translateY(10px);
+  transform: translateY(8px);
+}
+
+.intro-jurisdiction {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: clamp(0.55rem, 0.85vw, 0.66rem);
+  font-weight: 600;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: #D4A843;
+  margin-top: 0.5rem;
+  opacity: 0;
+  transform: translateY(6px);
 }
 
 /* ── Skip Button ── */
@@ -169,34 +306,36 @@
   align-items: center;
   gap: 8px;
   padding: 8px 18px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  color: rgba(255, 255, 255, 0.7);
+  background: rgba(13, 27, 42, 0.6);
+  border: 1px solid rgba(184, 134, 11, 0.35);
+  color: rgba(255, 255, 255, 0.85);
   font-family: var(--font-body, 'Inter', sans-serif);
   font-size: 0.75rem;
   font-weight: 600;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   border-radius: 9999px;
   cursor: pointer;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   transition: all 0.25s ease;
   opacity: 0;
 }
 
 .intro-skip-btn:hover {
-  background: rgba(167, 37, 58, 0.2);
-  border-color: #A7253A;
+  background: rgba(184, 134, 11, 0.25);
+  border-color: #D4A843;
   color: #FFFFFF;
-  box-shadow: 0 0 15px rgba(167, 37, 58, 0.4);
+  box-shadow: 0 0 18px rgba(184, 134, 11, 0.45);
   transform: translateY(-1px);
 }
 
 @media (max-width: 600px) {
-  .intro-logo-stroke,
-  .intro-logo-fill {
-    font-size: 72px;
+  .intro-pillars-ticker {
+    gap: 0.35rem 0.5rem;
+  }
+  .intro-pillar-sep {
+    display: none;
   }
   .intro-skip-btn {
     bottom: 1.25rem;

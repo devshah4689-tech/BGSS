@@ -1,0 +1,840 @@
+/* ============================================================
+   BGSS & Associates – Comprehensive Responsive System
+   responsive.css | v1.0
+   Pixel-perfect support for:
+   - Ultra-Compact Mobile (320px - 375px)
+   - Standard Mobile (375px - 480px)
+   - Phablets & Large Mobile (480px - 640px)
+   - Tablets Portrait (640px - 768px)
+   - Tablets Landscape & Small Laptops (768px - 1024px)
+   - Laptops & Desktops (1024px - 1440px)
+   - Large Displays & 4K (1440px+)
+   ============================================================ */
+
+/* ── 0. Global Fluid Foundation & Overflow Guard ── */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+img, svg, video, canvas {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Ensure all form inputs have minimum 16px on touch devices to prevent iOS auto-zoom */
+@media (max-width: 768px) {
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="search"],
+  input[type="number"],
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+}
+
+/* ============================================================
+   1. PILL NAVIGATION BAR — RESPONSIVE PERFECTION ACROSS ALL SCREENS
+   ============================================================ */
+
+.nav-container {
+  width: 100%;
+  max-width: var(--max-w-site, 1400px);
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.nav-pill-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  min-width: 0;
+}
+
+.nav-pill-bar {
+  display: inline-flex;
+  align-items: center;
+  background: var(--color-bgss-red, #A7253A);
+  border-radius: 9999px;
+  position: relative;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  flex-shrink: 0;
+}
+
+.nav-pill-bar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Tablet / Medium Desktop (1024px - 1280px) */
+@media (max-width: 1280px) {
+  .nav-container {
+    padding-inline: 1.5rem;
+  }
+  .nav-pill-bar {
+    padding: 5px 8px;
+    gap: 6px;
+  }
+  .nav-pill-link {
+    height: 42px;
+    min-width: 40px;
+    font-size: 1.15rem;
+  }
+  .nav-pill-link.active {
+    min-width: 56px;
+  }
+}
+
+/* Tablets (769px - 1024px) */
+@media (max-width: 1024px) {
+  :root {
+    --nav-h: 76px;
+    --nav-h-scrolled: 68px;
+  }
+
+  .nav-container {
+    padding-inline: 1rem;
+    gap: 0.75rem;
+  }
+
+  .nav-logo {
+    min-width: 90px;
+    flex-shrink: 0;
+  }
+
+  .nav-logo-img {
+    height: 30px;
+  }
+
+  .nav-logo-text {
+    font-size: 1.85rem;
+  }
+
+  .nav-right-actions {
+    min-width: 44px;
+    flex-shrink: 0;
+  }
+
+  .nav-pill-bar {
+    padding: 5px 6px;
+    gap: 5px;
+  }
+
+  .nav-pill-link {
+    height: 38px;
+    min-width: 36px;
+    padding: 0 8px;
+    font-size: 1.05rem;
+  }
+
+  .nav-pill-link.active {
+    min-width: 48px;
+  }
+}
+
+/* Large Mobile & Portrait Tablets (481px - 768px) */
+@media (max-width: 768px) {
+  :root {
+    --nav-h: 70px;
+    --nav-h-scrolled: 64px;
+  }
+
+  .nav-container {
+    padding-inline: 0.75rem;
+    gap: 0.5rem;
+  }
+
+  .nav-logo {
+    min-width: auto;
+  }
+
+  .nav-logo-img {
+    height: 26px;
+  }
+
+  .nav-logo-text {
+    font-size: 1.55rem;
+  }
+
+  .nav-search-circle {
+    width: 36px;
+    height: 36px;
+    font-size: 0.88rem;
+  }
+
+  .nav-pill-bar {
+    padding: 4px 6px;
+    gap: 4px;
+    box-shadow: 0 4px 14px rgba(167, 37, 58, 0.28);
+  }
+
+  .nav-pill-link {
+    height: 34px;
+    min-width: 32px;
+    padding: 0 6px;
+    font-size: 0.95rem;
+  }
+
+  .nav-pill-link.active {
+    min-width: 42px;
+  }
+
+  /* Disable hover tooltips on touch devices */
+  .nav-pill-link::after {
+    display: none !important;
+  }
+}
+
+/* Standard Mobile (361px - 480px) */
+@media (max-width: 480px) {
+  :root {
+    --nav-h: 66px;
+    --nav-h-scrolled: 60px;
+  }
+
+  .nav-container {
+    padding-inline: 0.5rem;
+    gap: 0.35rem;
+  }
+
+  .nav-logo-img {
+    height: 24px;
+  }
+
+  .nav-logo-text {
+    font-size: 1.35rem;
+  }
+
+  .nav-search-circle {
+    display: none; /* maximizes space for all 7 icons */
+  }
+
+  .nav-pill-wrapper {
+    justify-content: flex-end;
+  }
+
+  .nav-pill-bar {
+    padding: 3px 5px;
+    gap: 3px;
+  }
+
+  .nav-pill-link {
+    height: 32px;
+    min-width: 28px;
+    padding: 0 5px;
+    font-size: 0.88rem;
+  }
+
+  .nav-pill-link.active {
+    min-width: 38px;
+  }
+}
+
+/* Ultra-Compact Mobile (<= 360px) */
+@media (max-width: 360px) {
+  :root {
+    --nav-h: 62px;
+    --nav-h-scrolled: 58px;
+  }
+
+  .nav-container {
+    padding-inline: 0.35rem;
+    gap: 0.25rem;
+  }
+
+  .nav-logo-img {
+    height: 22px;
+  }
+
+  .nav-logo-text {
+    font-size: 1.2rem;
+  }
+
+  .nav-pill-bar {
+    padding: 2px 4px;
+    gap: 2px;
+  }
+
+  .nav-pill-link {
+    height: 30px;
+    min-width: 25px;
+    padding: 0 4px;
+    font-size: 0.8rem;
+  }
+
+  .nav-pill-link.active {
+    min-width: 32px;
+  }
+}
+
+/* ============================================================
+   2. HERO SLIDER SECTION — FLUID & ADAPTIVE
+   ============================================================ */
+
+/* Mobile & Tablet Overrides for Hero Slider Frame */
+@media (max-width: 1024px) {
+  .hero-slider-section {
+    padding: 1rem;
+    padding-top: calc(var(--nav-h) + 1rem);
+    padding-bottom: 2rem;
+    min-height: auto;
+  }
+
+  .hero-canvas-frame {
+    height: clamp(620px, 80vh, 800px);
+    min-height: 560px;
+    border-radius: 20px;
+  }
+
+  .hero-slide .hero-content {
+    padding-inline: clamp(1.5rem, 5vw, 3.5rem);
+    padding-top: clamp(2.5rem, 5vh, 4rem);
+    padding-bottom: clamp(6.5rem, 12vh, 8rem);
+  }
+
+  .hero-title {
+    max-width: 22ch;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-slider-section {
+    padding: 0.65rem;
+    padding-top: calc(var(--nav-h) + 0.65rem);
+    padding-bottom: 1.5rem;
+  }
+
+  .hero-canvas-frame {
+    height: auto;
+    min-height: calc(100svh - var(--nav-h) - 1.3rem);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .hero-corner-bracket {
+    width: 16px;
+    height: 16px;
+  }
+  .hero-corner-bracket.top-left { top: 8px; left: 8px; }
+  .hero-corner-bracket.top-right { top: 8px; right: 8px; }
+  .hero-corner-bracket.bottom-left { bottom: 8px; left: 8px; }
+  .hero-corner-bracket.bottom-right { bottom: 8px; right: 8px; }
+
+  .hero-slide {
+    position: relative;
+    height: auto;
+    min-height: calc(100svh - var(--nav-h) - 1.3rem);
+    display: flex;
+    align-items: center;
+  }
+
+  .hero-slide:not(.active) {
+    position: absolute;
+  }
+
+  .hero-slide .hero-content {
+    padding-inline: 1.25rem;
+    padding-top: 1.5rem;
+    padding-bottom: 6rem;
+    width: 100%;
+  }
+
+  .hero-floating-badge {
+    padding: 0.3rem 0.75rem;
+    gap: 0.45rem;
+    font-size: 0.7rem;
+    max-width: 100%;
+    flex-wrap: wrap;
+  }
+  .hero-floating-badge .badge-stat {
+    font-size: 0.68rem;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.68rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-title {
+    font-size: clamp(1.75rem, 7vw, 2.5rem);
+    line-height: 1.16;
+    margin-bottom: 0.85rem;
+    max-width: 100%;
+    word-break: break-word;
+  }
+
+  .hero-sub {
+    font-size: 0.88rem;
+    line-height: 1.55;
+    margin-bottom: 1.25rem;
+    max-width: 100%;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+    align-items: stretch;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    padding: 0.85rem 1.25rem;
+    font-size: 0.85rem;
+  }
+
+  .hero-slider-bottom {
+    bottom: 1rem;
+    padding-inline: 0.75rem;
+  }
+
+  .hero-slider-bottom-inner {
+    padding: 6px 10px;
+    border-radius: 9999px;
+    background: rgba(9, 14, 23, 0.9);
+  }
+
+  .hero-slider-tabs {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .hero-slider-tab {
+    padding: 6px 8px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-slider-tab .tab-index {
+    margin-bottom: 0;
+    font-size: 0.7rem;
+  }
+
+  .hero-slider-tab .tab-progress {
+    display: none;
+  }
+
+  .hero-scroll-indicator {
+    display: none; /* Maximize visible real estate on mobile */
+  }
+}
+
+@media (max-width: 380px) {
+  .hero-slide .hero-content {
+    padding-inline: 0.9rem;
+    padding-bottom: 5.5rem;
+  }
+
+  .hero-title {
+    font-size: 1.6rem;
+  }
+
+  .hero-floating-badge .badge-stat {
+    display: none; /* Keep badge ultra-clean on tiny screens */
+  }
+}
+
+/* ============================================================
+   3. PARTNERS' THOUGHT (AD CAROUSEL) RESPONSIVE
+   ============================================================ */
+
+.partner-ad-viewport {
+  width: 100%;
+  overflow: hidden;
+}
+
+.partner-ad-track {
+  display: flex;
+  transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+  gap: 16px;
+}
+
+@media (min-width: 1100px) {
+  .partner-ad-card {
+    flex: 0 0 calc((100% - 32px) / 3);
+  }
+}
+
+@media (max-width: 1099px) and (min-width: 681px) {
+  .partner-ad-card {
+    flex: 0 0 calc((100% - 16px) / 2);
+  }
+}
+
+@media (max-width: 680px) {
+  .partner-ad-card {
+    flex: 0 0 100%;
+  }
+  .partners-thoughts-section {
+    padding: clamp(2.5rem, 6vw, 4rem) 0;
+  }
+}
+
+/* Touch Support for Partner Cards (Desktop Hover fallback) */
+@media (hover: none) {
+  .partner-card .partner-hover-details {
+    opacity: 0.96;
+    transform: translateY(0);
+    pointer-events: auto;
+    background: linear-gradient(to top, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.85) 60%, rgba(15, 23, 42, 0.4) 100%);
+    padding: 1.25rem;
+  }
+
+  .partner-card .partner-hover-bio {
+    -webkit-line-clamp: 2;
+  }
+}
+
+/* ============================================================
+   4. SERVICES, STATS & WHY BGSS GRIDS
+   ============================================================ */
+
+@media (max-width: 1024px) {
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-6, 1.5rem);
+  }
+
+  .why-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-10, 2.5rem);
+  }
+
+  .global-inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-8, 2rem);
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-10, 2.5rem);
+  }
+}
+
+@media (max-width: 640px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .partners-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-6, 1.5rem);
+  }
+
+  .about-stats {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4, 1rem);
+  }
+
+  .stat-item {
+    padding: var(--space-4, 1rem);
+  }
+
+  .stat-number {
+    font-size: clamp(2rem, 8vw, 2.75rem);
+  }
+
+  .section-pad {
+    padding-block: clamp(3.5rem, 8vw, 5rem);
+  }
+
+  .section-title {
+    font-size: clamp(1.85rem, 6.5vw, 2.5rem);
+  }
+}
+
+@media (max-width: 380px) {
+  .about-stats {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================================
+   5. CONTACT FORMS & FULL-SCREEN MODAL
+   ============================================================ */
+
+@media (max-width: 768px) {
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: var(--space-4, 1rem);
+  }
+
+  .contact-form {
+    padding: var(--space-6, 1.5rem);
+  }
+}
+
+/* Contact Modal Component (Styles that were missing!) */
+.contact-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.contact-modal.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.contact-modal__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.contact-modal__panel {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 580px;
+  height: 100%;
+  background: #FFFFFF;
+  box-shadow: -10px 0 40px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.contact-modal.is-open .contact-modal__panel {
+  transform: translateX(0);
+}
+
+.contact-modal__header {
+  padding: 16px 20px;
+  display: flex;
+  justify-content: flex-end;
+  border-bottom: 1px solid #E2E8F0;
+}
+
+.contact-modal__close {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #F1F5F9;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #475569;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+.contact-modal__close:hover {
+  background: #A7253A;
+  color: #FFFFFF;
+}
+
+.contact-modal__body {
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.contact-modal__title {
+  font-family: var(--font-display, Georgia, serif);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #1E1F21;
+}
+
+.contact-modal__subtitle {
+  font-size: 0.9rem;
+  color: #64748B;
+  line-height: 1.5;
+  margin-top: 4px;
+}
+
+.contact-modal__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.contact-modal__label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+.contact-modal__input,
+.contact-modal__textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid #CBD5E1;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.92rem;
+  outline: none;
+  transition: border-color 0.2s;
+  background: #FFFFFF;
+  box-sizing: border-box;
+}
+
+.contact-modal__input:focus,
+.contact-modal__textarea:focus {
+  border-color: #A7253A;
+}
+
+.contact-modal__submit {
+  width: 100%;
+  padding: 12px 20px;
+  background: #A7253A;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background 0.2s;
+  margin-top: 10px;
+}
+
+.contact-modal__submit:hover {
+  background: #891E30;
+}
+
+.contact-modal__honeypot {
+  position: absolute;
+  left: -9999px;
+  top: -9999px;
+}
+
+@media (max-width: 640px) {
+  .contact-modal__panel {
+    max-width: 100%;
+  }
+  .contact-modal__body {
+    padding: 16px 18px;
+  }
+}
+
+/* ============================================================
+   6. SITE FOOTER RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 1024px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .footer-bottom-inner {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .footer-legal-links {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+/* ============================================================
+   7. SUBPAGES (ABOUT, SERVICES, KNOWLEDGE BANK) RESPONSIVE
+   ============================================================ */
+
+/* Page Hero */
+@media (max-width: 768px) {
+  .page-hero {
+    padding-top: calc(var(--nav-h) + 2rem);
+    padding-bottom: 3.5rem;
+  }
+  .page-hero h1 {
+    font-size: clamp(1.85rem, 6.5vw, 2.5rem);
+  }
+}
+
+/* Partner Bio Cards in about.html / about.php */
+@media (max-width: 860px) {
+  .partner-bio-card {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem;
+  }
+  .partner-bio-img-wrap {
+    max-width: 260px;
+    margin: 0 auto;
+  }
+}
+
+/* Service Detail Grids in services.html / services.php */
+@media (max-width: 900px) {
+  .service-detail-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem;
+  }
+  .service-detail:nth-child(even) .service-detail-content {
+    order: unset;
+  }
+}
+
+/* Knowledge Bank Filters & Cards in knowledge-bank.html */
+@media (max-width: 768px) {
+  .kb-subnav-inner {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+  .kb-filter-pills {
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 6px;
+    scrollbar-width: none;
+  }
+  .kb-filter-pills::-webkit-scrollbar {
+    display: none;
+  }
+  .kb-presentations-wrap,
+  .kb-videos-wrap {
+    grid-template-columns: 1fr;
+  }
+}
