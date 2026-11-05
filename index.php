@@ -815,7 +815,7 @@ require_once __DIR__ . '/includes/navigation.php';
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
             </div>
             <div class="contact-detail-text">
-              <a href="mailto:info@bgssassociates.com" style="color:var(--color-charcoal);font-weight:500;">info@bgssassociates.com</a><br>
+              <a href="mailto:devshah4689@gmail.com" style="color:var(--color-charcoal);font-weight:500;">devshah4689@gmail.com</a><br>
               <span style="color:var(--color-muted);font-size:var(--text-sm);">We respond within one business day</span>
             </div>
           </div>

@@ -8,9 +8,11 @@
 define('SITE_NAME',        'BGSS & Associates');
 define('SITE_TAGLINE',     'Chartered Accountants | Tax & Regulatory Advisory');
 define('SITE_URL',         'https://bgssassociates.com');
-define('SITE_EMAIL',       'info@bgssassociates.com');
+define('SITE_EMAIL',       'devshah4689@gmail.com');
 define('SITE_PHONE',       '+91 90999 27783');
 define('SITE_PHONE_ALT',   '+91 79 4890 4100');
+define('SITE_WHATSAPP',    '+91 63523 92705');
+define('WHATSAPP_NUMBER',  '916352392705');
 define('SITE_ADDRESS',     '604, Shiti Ratna Building, Panchwati Circle, C.G. Road, Ahmedabad – 380 009, Gujarat, India');
 
 // ── SEO Defaults ───────────────────────────────────────────────────────────────
@@ -19,7 +21,7 @@ define('META_KEYWORDS',    'tax advisory India, chartered accountants Ahmedabad,
 define('OG_IMAGE',         SITE_URL . '/assets/images/og-image.jpg');
 
 // ── Contact Form ───────────────────────────────────────────────────────────────
-define('FORM_TO_EMAIL',    'info@bgssassociates.com');
+define('FORM_TO_EMAIL',    'devshah4689@gmail.com');
 define('FORM_FROM_EMAIL',  'noreply@bgssassociates.com');
 define('FORM_FROM_NAME',   'BGSS Website Contact');
 

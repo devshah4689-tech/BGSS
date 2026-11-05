@@ -68,7 +68,7 @@ require_once __DIR__ . '/includes/navigation.php';
         <p>
           For inquiries regarding our data handling or confidentiality policies, please reach out directly to:
           <br><strong>BGSS &amp; Associates</strong>
-          <br>Email: <a href="mailto:info@bgssassociates.com" style="color: var(--color-gold); font-weight: 600;">info@bgssassociates.com</a>
+          <br>Email: <a href="mailto:devshah4689@gmail.com" style="color: var(--color-gold); font-weight: 600;">devshah4689@gmail.com</a>
           <br>Telephone: +91 79 4890 4100
         </p>
       </article>

@@ -59,7 +59,7 @@ require_once __DIR__ . '/includes/navigation.php';
 
         <h2 style="font-size: var(--text-2xl); color: var(--color-navy); margin-bottom: var(--space-4);">4. Updates to this Policy</h2>
         <p>
-          Any revisions to our technical cookie usage will be documented on this page. For additional clarity, write to <a href="mailto:info@bgssassociates.com" style="color: var(--color-gold); font-weight: 600;">info@bgssassociates.com</a>.
+          Any revisions to our technical cookie usage will be documented on this page. For additional clarity, write to <a href="mailto:devshah4689@gmail.com" style="color: var(--color-gold); font-weight: 600;">devshah4689@gmail.com</a>.
         </p>
       </article>
     </div>

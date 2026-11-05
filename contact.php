@@ -85,7 +85,7 @@ require_once __DIR__ . '/includes/navigation.php';
             <div>
               <div class="contact-info-item-label">Electronic Mail</div>
               <div class="contact-info-item-value">
-                <a href="mailto:info@bgssassociates.com">info@bgssassociates.com</a>
+                <a href="mailto:devshah4689@gmail.com">devshah4689@gmail.com</a>
               </div>
               <p style="font-size: var(--text-xs); color: var(--color-muted); margin-top: 4px;">
                 Responses provided within one business day
@@ -287,7 +287,7 @@ require_once __DIR__ . '/includes/navigation.php';
             Ahmedabad, Gujarat, India
           </p>
           <p style="font-size: var(--text-xs); color: var(--color-muted); margin-top: var(--space-2);">
-            Telephone: +91 79 4890 4100 &bull; Email: info@bgssassociates.com
+            Telephone: +91 79 4890 4100 &bull; Email: devshah4689@gmail.com
           </p>
         </div>
       </div>

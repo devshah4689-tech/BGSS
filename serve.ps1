@@ -40,6 +40,15 @@ try {
             $relPath = $urlPath.TrimStart("/").Replace("/", "\")
             $filePath = Join-Path $folder $relPath
 
+            # If directory, look for index.html or index.php
+            if (Test-Path $filePath -PathType Container) {
+                if (Test-Path (Join-Path $filePath "index.html") -PathType Leaf) {
+                    $filePath = Join-Path $filePath "index.html"
+                } elseif (Test-Path (Join-Path $filePath "index.php") -PathType Leaf) {
+                    $filePath = Join-Path $filePath "index.php"
+                }
+            }
+
             if (-not (Test-Path $filePath -PathType Leaf)) {
                 # Try appending .html
                 if (Test-Path "$filePath.html" -PathType Leaf) {

@@ -22,21 +22,13 @@ require_once __DIR__ . '/includes/navigation.php';
 <main id="main-content">
 
   <!-- PAGE HERO -->
-  <section class="page-hero" style="position:relative; overflow:hidden; background: radial-gradient(circle at 80% 20%, rgba(167, 37, 58, 0.22) 0%, transparent 60%), #090E17; padding: clamp(4rem, 8vh, 6.5rem) 0 clamp(2.5rem, 5vh, 4rem);">
-    <div class="container" style="position:relative; z-index:2;">
-      <nav class="page-hero-breadcrumb" style="display:flex; gap:8px; font-size:0.8rem; color:rgba(255,255,255,0.6); margin-bottom:1.25rem;">
-        <a href="/" style="color:inherit; text-decoration:none;">Home</a> / <span style="color:#D2909B;">Knowledge Bank</span>
-      </nav>
-      <div style="display:inline-flex; align-items:center; gap:8px; background:rgba(167,37,58,0.18); border:1px solid rgba(167,37,58,0.4); padding:4px 14px; border-radius:9999px; margin-bottom:1rem;">
-        <span style="width:6px; height:6px; border-radius:50%; background:#D2909B; box-shadow:0 0 8px #D2909B;"></span>
-        <span style="font-size:0.72rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:#D2909B;">Executive Thought Leadership &bull; 2024</span>
-      </div>
-      <h1 style="font-family:var(--font-display); font-size:clamp(2.2rem, 4.5vw, 3.8rem); font-weight:500; color:#FFFFFF; line-height:1.15; max-width:18ch; margin-bottom:1.25rem;">
-        Decades of Technical Depth. <em style="font-style:normal; background:linear-gradient(135deg, #FFF 30%, #FFB3C1 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">Open for Industry Leaders.</em>
-      </h1>
-      <p style="max-width:58ch; color:rgba(255,255,255,0.78); font-size:clamp(0.95rem, 1.15vw, 1.1rem); line-height:1.7; margin-bottom:0;">
-        Access our complete repository of technical eBooks with interactive 3D page flip animation, in-website presentation slide decks, and high-stakes YouTube webinars curated by BGSS &amp; Associates partners.
-      </p>
+  <section class="page-hero">
+    <div class="page-hero-bg"><img src="/assets/images/about-office.jpg" alt="BGSS Knowledge Bank" fetchpriority="high" decoding="async"></div>
+    <div class="page-hero-content">
+      <nav class="page-hero-breadcrumb"><a href="/">Home</a> / <span>Knowledge Bank</span></nav>
+      <p class="overline">Executive Thought Leadership</p>
+      <h1>Technical Knowledge <em>Repository.</em></h1>
+      <p class="page-hero-sub">Access our complete repository of technical eBooks with interactive 3D page-flip animation, in-website presentation slide decks, and expert YouTube webinars curated by BGSS &amp; Associates partners.</p>
     </div>
   </section>
 
