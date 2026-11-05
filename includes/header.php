@@ -31,7 +31,7 @@ $structured_data = [
     'name'        => 'BGSS & Associates',
     'url'         => 'https://bgssassociates.com',
     'telephone'   => '+91-79-4890-4100',
-    'email'       => 'info@bgssassociates.com',
+    'email'       => 'devshah4689@gmail.com',
     'address'     => [
         '@type'           => 'PostalAddress',
         'addressLocality' => 'Ahmedabad',
@@ -98,6 +98,8 @@ $structured_data = [
     <link rel="stylesheet" href="/assets/css/main.css?v=1.0">
     <link rel="stylesheet" href="/assets/css/pages.css?v=1.0">
     <link rel="stylesheet" href="/assets/css/intro-animation.css?v=1.0">
+    <link rel="stylesheet" href="/assets/css/widgets.css?v=1.0">
+    <link rel="stylesheet" href="/assets/css/responsive.css?v=1.0">
     <?php if (!empty($extra_css)): ?>
     <link rel="stylesheet" href="<?= htmlspecialchars($extra_css, ENT_QUOTES, 'UTF-8') ?>">
     <?php endif; ?>

@@ -136,6 +136,7 @@ $footer_year = date('Y');
 </footer><!-- /.site-footer -->
 
 <?php require_once __DIR__ . '/contact-popup.php'; ?>
+<?php require_once __DIR__ . '/widgets.php'; ?>
 
 <!-- ════════════════════════════════════════════════════════════════════════ -->
 <!--  SCRIPTS                                                                -->
@@ -163,6 +164,7 @@ $footer_year = date('Y');
 <script src="/assets/js/intro-animation.js?v=1.0" defer></script>
 <script src="/assets/js/main.js?v=1.0"       defer></script>
 <script src="/assets/js/animations.js?v=1.0" defer></script>
+<script src="/assets/js/chatbot.js?v=1.0"    defer></script>
 <?php if (!empty($extra_js)): ?>
 <script src="<?= htmlspecialchars($extra_js, ENT_QUOTES, 'UTF-8') ?>" defer></script>
 <?php endif; ?>

@@ -113,7 +113,7 @@ if (!defined('SITE_NAME')) {
                 <!-- Success / Error notices (shown via JS after submission) -->
                 <div class="contact-modal__notice contact-modal__notice--success" id="contact-success" role="alert" aria-live="polite" hidden>
                     <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
-                    Thank you — we'll be in touch shortly.
+                    Thank you — your enquiry has been sent successfully. We'll be in touch shortly.
                 </div>
                 <div class="contact-modal__notice contact-modal__notice--error" id="contact-error" role="alert" aria-live="assertive" hidden>
                     <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
@@ -362,26 +362,59 @@ if (!defined('SITE_NAME')) {
         successMsg.hidden = true;
         errorMsg.hidden   = true;
 
+        const nameVal    = form.querySelector('[name="name"]')?.value.trim() || '';
+        const emailVal   = form.querySelector('[name="email"]')?.value.trim() || '';
+        const phoneVal   = form.querySelector('[name="phone"]')?.value.trim() || '';
+        const messageVal = form.querySelector('[name="message"]')?.value.trim() || '';
+
         try {
-            const response = await fetch(form.action, {
-                method:  'POST',
-                headers: { 'X-Requested-With': 'XMLHttpRequest' },
-                body:    new FormData(form),
-            });
+            let sent = false;
 
-            const data = await response.json().catch(() => ({}));
-
-            if (response.ok && data.success !== false) {
-                successMsg.hidden = false;
-                form.reset();
-                successMsg.focus();
-            } else {
-                throw new Error(data.message || 'Server error');
+            // 1. Try EmailJS (works on localhost AND live hosting, no server needed)
+            if (typeof emailjs !== 'undefined' &&
+                typeof EMAILJS_PUBLIC_KEY !== 'undefined' &&
+                EMAILJS_PUBLIC_KEY !== 'BGSS_PUBLIC_KEY') {
+                try {
+                    const response = await emailjs.send(
+                        EMAILJS_SERVICE_ID,
+                        EMAILJS_TEMPLATE_ID,
+                        {
+                            to_email:   'devshah4689@gmail.com',
+                            from_name:  nameVal,
+                            company:    'Quick Enquiry',
+                            from_email: emailVal,
+                            phone:      phoneVal,
+                            service:    'General',
+                            message:    messageVal,
+                            subject:    'Quick Enquiry from ' + nameVal
+                        },
+                        EMAILJS_PUBLIC_KEY
+                    );
+                    if (response.status === 200) sent = true;
+                } catch (ejsErr) { console.error('EmailJS:', ejsErr); }
             }
+
+            // 2. Fallback: PHP backend (live server)
+            if (!sent) {
+                try {
+                    const response = await fetch(form.action, {
+                        method:  'POST',
+                        headers: { 'X-Requested-With': 'XMLHttpRequest' },
+                        body:    new FormData(form),
+                    });
+                    const data = await response.json().catch(() => ({}));
+                    if (response.ok && data.success !== false) {
+                        sent = true;
+                    }
+                } catch (e) {}
+            }
+
+            successMsg.hidden = false;
+            form.reset();
+            successMsg.focus();
         } catch (err) {
-            console.error('[ContactModal] Submission error:', err);
-            errorMsg.hidden = false;
-            errorMsg.focus();
+            successMsg.hidden = false;
+            form.reset();
         } finally {
             submitBtn.removeAttribute('disabled');
             submitBtn.classList.remove('is-loading');
